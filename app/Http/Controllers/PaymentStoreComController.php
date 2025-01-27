@@ -11,9 +11,9 @@ class PaymentStoreComController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function paiement_store_page()
     {
-        //
+        return view("admin.paiement_store") ;
     }
 
     /**

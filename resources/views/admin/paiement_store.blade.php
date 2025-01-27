@@ -148,52 +148,11 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Paiments (Stores-Commerciaux) </h1>
 
                 </div>
 
-                <!-- Content Row -->
-                <div class="row">
-
-                    <!-- Earnings (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-primary shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                            Nombre de clients</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800"> 130 </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-store  fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Earnings (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-success shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                            Nombre de commerciaux </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800"> 13 </div>
-                                    </div>
-                                    <div class="col-auto">
-
-                                        <i class="fas fa-user-tie fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
+              
 
 
             </div>
@@ -201,54 +160,7 @@
 
 
             <div class="p-5">
-                <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Ajouter un Utilisateur</h1>
-                </div>
-
-                <form class="user" method="post" action="add_user">
-                    <div class="form-group row">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <input type="text" class="form-control form-control-user" id="exampleFirstName" name="name"
-                                placeholder="Nom complet">
-                        </div>
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                name="email" placeholder="Email@">
-                        </div>
-
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <input type="password" class="form-control form-control-user" name="ps1"
-                                id="exampleInputPassword" placeholder="Mot de passe">
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="password" class="form-control form-control-user" name="ps2"
-                                id="exampleRepeatPassword" placeholder="Retaper le M.D.P">
-                        </div>
-                    </div>
-
-
-                    <div class="form-group row">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <select class="form-control form-control-user" name="role">
-                                <option value=""> </option>
-                                <option value="admin"> Admin </option>
-                                <option value="commercial"> Commercial </option>
-                            </select>
-                        </div>
-
-                    </div>
-
-                    <button type="submit" class="btn btn-primary btn-user btn-block">
-                        Ajouter
-                    </button>
-
-
-                </form>
-
-                <hr>
+                 
 
             </div>
 
@@ -256,6 +168,8 @@
         </div>
         <!-- End of Main Content -->
 
+
+      
 
         <!-- Footer -->
         <footer class="sticky-footer bg-white">

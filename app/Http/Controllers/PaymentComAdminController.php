@@ -11,9 +11,10 @@ class PaymentComAdminController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function paiement_commerciaux_page()
     {
-        //
+        return view("admin.paiement_commerciaux") ;
+
     }
 
     /**

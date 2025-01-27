@@ -11,9 +11,9 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function ajouter_produit_page()
     {
-        //
+        return view('admin.ajouter_produit') ;
     }
 
     /**
