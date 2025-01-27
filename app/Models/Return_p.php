@@ -9,4 +9,10 @@ class Return_p extends Model
 {
     /** @use HasFactory<\Database\Factories\ReturnPFactory> */
     use HasFactory;
+
+    protected  $fillable  = [
+
+        "sale_id",
+ 
+    ];
 }

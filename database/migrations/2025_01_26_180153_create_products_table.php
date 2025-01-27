@@ -17,8 +17,9 @@ return new class extends Migration
             $table->unsignedBigInteger("brand_id")->nullable();
             $table->string("product_name");
             $table->unsignedSmallInteger("prix_garantie")->nullable()->default(0);
-            $table->smallInteger("nb_jr_garantie")->nullable();
-            // $table->smallInteger("nb_jr_garantie")->nullable();
+            $table->unsignedSmallInteger("nb_jr_garantie")->nullable();
+            $table->boolean("double_puce");
+            $table->boolean("actif")->default(1);
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('SET NULL');
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('SET NULL');

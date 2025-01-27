@@ -9,4 +9,13 @@ class Store extends Model
 {
     /** @use HasFactory<\Database\Factories\StoreFactory> */
     use HasFactory;
+
+    protected  $fillable  = [
+
+        "store_name",
+        "id_added_by_com",
+        "id_prop",
+        "total_to_pay",
+
+    ];
 }

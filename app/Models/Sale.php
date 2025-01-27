@@ -9,4 +9,15 @@ class Sale extends Model
 {
     /** @use HasFactory<\Database\Factories\SaleFactory> */
     use HasFactory;
+
+    protected  $fillable  = [
+        "product_id",
+        "imei1",
+        "imei2",
+        "sn",
+        "info_product_img",
+        "nom_client",
+        "tlf_client",
+
+    ];
 }

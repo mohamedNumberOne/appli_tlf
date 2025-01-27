@@ -9,4 +9,18 @@ class History extends Model
 {
     /** @use HasFactory<\Database\Factories\HistoryFactory> */
     use HasFactory;
+
+
+    protected  $fillable  = [
+
+        "sale_id",
+        "product_id",
+        "imei1",
+        "imei2",
+        "sn",
+        "info_product_img",
+        "nom_client",
+        "tlf_client",
+
+    ];
 }
