@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role' , [ "admin" , "commercial" , "prop_store" ] );
-            $table->unsignedInteger('solde' )-> default(0)-> nullable();
+            $table->unsignedInteger('solde' )-> default(0) -> nullable();
             $table->rememberToken();
             $table->timestamps();
         });
