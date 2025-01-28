@@ -14,7 +14,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="{{ route('dashboard') }}"  wire:navigate >
+        <a class="nav-link" href="{{ route('dashboard') }}"   >
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -33,8 +33,8 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
 
-                <a class="collapse-item" href="{{ route('paiement_store') }}" wire:navigate >Paiments  Stores</a>
-                <a class="collapse-item" href="{{ route('paiement_commerciaux') }}" wire:navigate >Paiments  Commerciaux</a>
+                <a class="collapse-item" href="{{ route('paiement_store') }}" >Paiments  Stores</a>
+                <a class="collapse-item" href="{{ route('paiement_commerciaux') }}"  >Paiments  Commerciaux</a>
                
             </div>
         </div>
@@ -54,13 +54,29 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item"   href="{{ route('ajouter_produit') }}" wire:navigate >Produits+</a>
+                <a class="collapse-item"   href="{{ route('ajouter_produit') }}" >Produits+</a>
                
             </div>
         </div>
     </li>
 
   
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#store"
+            aria-expanded="true" aria-controls="store">
+            <i class="fas fa-store"></i>
+            <span>Stores</span>
+        </a>
+        <div id="store" class="collapse" aria-labelledby="storeUtilities"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item"   href="{{ route('liste_store') }}" >Liste</a>
+            </div>
+        </div>
+    </li>
+
+
 
 
 </ul>

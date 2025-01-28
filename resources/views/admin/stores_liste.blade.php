@@ -46,7 +46,7 @@
                         </div>
                     </li>
 
-                    
+
 
                     <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -97,11 +97,11 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Paiments (Stores-Commerciaux) </h1>
+                    <h1 class="h3 mb-0 text-gray-800"> Stores </h1>
 
                 </div>
 
-              
+
 
 
             </div>
@@ -109,7 +109,50 @@
 
 
             <div class="p-5">
-                 
+
+                <div class="mt-2 mb-2  ">
+                    <h1 class="text-center"> Liste des Stores </h1>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">id</th>
+                                <th scope="col">Nom store</th>
+                                <th scope="col">Nom Prop.</th>
+                                <th scope="col">à payer</th>
+                                <th scope="col">téléphone </th>
+                                <th scope="col">Email </th>
+                                <th scope="col"> Commercial </th>
+                                <th scope="col"> Action </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach ($all_stores as $store)
+                            <tr>
+                                <th scope="row"> {{ $store -> store_id }} </th>
+                                <td>{{ $store -> store_name }} </td>
+                                <td>{{ $store -> prop_name }} </td>
+                                <td>{{ $store -> solde }} DA </td>
+                                <td>{{ $store -> tlf_prop }} </td>
+                                <td>{{ $store -> email_prop }} </td>
+                                <td>
+                                    {{ $store -> commercial_name }}
+                                </td>
+                                <td> <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-pen-square"></i>
+                                    </button> 
+                                </td>
+
+                            </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                    <div>
+                        {{ $all_stores->links() }} 
+                    </div>
+                </div>
+
 
             </div>
 
@@ -118,7 +161,7 @@
         <!-- End of Main Content -->
 
 
-      
+
 
         <!-- Footer -->
         <footer class="sticky-footer bg-white">
