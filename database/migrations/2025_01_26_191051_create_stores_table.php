@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string("store_name");
             $table->unsignedBigInteger("id_added_by_com")->nullable();
             $table->unsignedBigInteger("id_prop")->nullable();
-            $table->integer("total_to_pay");
+            $table->integer("total_to_pay")->nullable()->default(0) ;
 
             $table->foreign("id_added_by_com")->references('id')->on('users')->onDelete('SET NULL');
             $table->foreign("id_prop")->references('id')->on('users')->onDelete('SET NULL');
