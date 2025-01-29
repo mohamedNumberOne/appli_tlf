@@ -13,10 +13,11 @@ use Illuminate\Validation\Rules;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 use Illuminate\Support\Facades\DB;
-
+// Use App\Models\Store;
+// use App\Http\Controllers\StoreController; 
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class UserController extends StoreController
 {
 
 
@@ -30,10 +31,12 @@ class UserController extends Controller
         $admins = User::where('role' , "admin" ) -> 
         orderBy('created_at', 'desc') -> paginate(10) ;
 
-        return  view("dashboard" , compact("store_users" , "commerciaux" , 'admins' ) ) ;
+        $nb_stores = $this -> get_nb_stores() ;
+
+        return  view("dashboard" , compact("store_users" , "commerciaux" , 'admins', "nb_stores" )  ) ;
     }
 
-     
+
 
     public function delete_user( $id ) {
          
@@ -71,7 +74,7 @@ class UserController extends Controller
 
         // return dd($request-> all() ) ;
 
-        return redirect()->route('dashboard')->with('success', 'utilisateur ajouté');
+        return redirect()->route('dashboard')->with('success', 'Utilisateur ajouté');
 
     }
 

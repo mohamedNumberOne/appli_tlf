@@ -1,83 +1,101 @@
-
-
 <!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-    <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-
-        <div class="sidebar-brand-text mx-3"> {{ Auth::user()->role }} </div>
-    </a>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
-
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="{{ route('dashboard') }}"   >
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-
-    <!-- Nav Item - Paiments-->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-            aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-dollar-sign"></i>
-            <span>Paiements</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-
-                <a class="collapse-item" href="{{ route('paiement_store') }}" >Paiments  Stores</a>
-                <a class="collapse-item" href="{{ route('paiement_commerciaux') }}"  >Paiments  Commerciaux</a>
-               
+<div class="sidebar" data-background-color="dark">
+    <div class="sidebar-logo">
+        <!-- Logo Header -->
+        <div class="logo-header" data-background-color="dark">
+            <a href="index.html" class="logo">
+                <img src="{{ asset('assets/img/kaiadmin/logo_light.svg') }}" alt="navbar brand" class="navbar-brand"
+                    height="20" />
+            </a>
+            <div class="nav-toggle">
+                <button class="btn btn-toggle toggle-sidebar">
+                    <i class="gg-menu-right"></i>
+                </button>
+                <button class="btn btn-toggle sidenav-toggler">
+                    <i class="gg-menu-left"></i>
+                </button>
             </div>
+            <button class="topbar-toggler more">
+                <i class="gg-more-vertical-alt"></i>
+            </button>
         </div>
-    </li>
+        <!-- End Logo Header -->
 
-    <hr class="sidebar-divider">
+    </div>
+    <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+            <ul class="nav nav-secondary">
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+                        <i class="fas fa-home"></i>
+                        <p>Dashboard</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="dashboard">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="{{ route('dashboard') }}">
+                                    <span class="sub-item">Dashboard </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#base">
+                        <i class="fas fa-dollar-sign"></i>
+                        <p>Paiements</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="base">
+                        <ul class="nav nav-collapse">
+                            
+                            <li>
+                                <a href="{{ route('paiement_store') }}">
+                                    <span class="sub-item">Store-Commerciaux</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('paiement_commerciaux') }}">
+                                    <span class="sub-item">Commerciaux-Admin</span>
+                                </a>
+                            </li>
 
-    <!-- Nav Item  CATEGORY + PRODUITS  -->
-
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fas fa-mobile-alt"></i>
-            <span>Produits</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-            data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item"   href="{{ route('ajouter_produit') }}" >Produits+</a>
-               
-            </div>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#sidebarLayouts">
+                        <i class="fas fa-store"></i>
+                        <p> Stores </p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="sidebarLayouts">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="{{ route('liste_store') }}">
+                                    <span class="sub-item">Liste</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="icon-menu.html">
+                                    <span class="sub-item">Icon Menu</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="{{route('')}}">
+                        <i class="fas fa-mobile-alt"></i>
+                        <p> Produits </p>
+                        <span class="caret"></span>
+                    </a>
+                     
+                </li>
+            </ul>
         </div>
-    </li>
-
-  
-
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#store"
-            aria-expanded="true" aria-controls="store">
-            <i class="fas fa-store"></i>
-            <span>Stores</span>
-        </a>
-        <div id="store" class="collapse" aria-labelledby="storeUtilities"
-            data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item"   href="{{ route('liste_store') }}" >Liste</a>
-            </div>
-        </div>
-    </li>
-
-
-
-
-</ul>
-<!-- End of Sidebar -->
+    </div>
+</div>
+<!-- End Sidebar -->

@@ -1,342 +1,292 @@
 @extends('admin.template')
+ 
+
+@section('page_name')
+dashboard
+@endsection
+
+@section('title')
+dashboard
+@endsection
+
+@section('side_bare')
+@include('admin.admin_sidebare')
+@endsection
 
 @section('content')
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-
-        @include('admin.admin_sidebare')
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
 
 
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
-
-
-                        <div class="topbar-divider d-none d-sm-block"></div>
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                    {{ Auth::user()->name }}
-                                </span>
-                                <img class="img-profile rounded-circle" src="{{ asset('img/undraw_profile.svg') }}">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="{{ route('profile') }}">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                {{-- <a class="dropdown-item" href="#">
-                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Settings
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Activity Log
-                            </a> --}}
-                                <div class="dropdown-divider"></div>
-
-
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
-                                        <button class="dropdown-item" type="submit"> Déconnexion </button>
-                                    </form>
-                                </a>
-                            </div>
-                        </li>
-
-                    </ul>
-
-                </nav>
-                <!-- End of Topbar -->
-
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-
-                    </div>
-
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Nombre de clients</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"> 130 </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-store  fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+<div class="row">
+    <div class="col-sm-6 col-md-3">
+        <div class="card card-stats card-round">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-icon">
+                        <div class="icon-big text-center icon-primary bubble-shadow-small">
+                            <i class="fas fa-users"></i>
                         </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Nombre de commerciaux </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"> 13 </div>
-                                        </div>
-                                        <div class="col-auto">
-
-                                            <i class="fas fa-user-tie fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
                     </div>
-
-
+                    <div class="col col-stats ms-3 ms-sm-0">
+                        <div class="numbers">
+                            <p class="card-category">Commerciaux</p>
+                            <h4 class="card-title"> {{ count( $commerciaux ) }} </h4>
+                        </div>
+                    </div>
                 </div>
-                <!-- /.container-fluid -->
-
-
-                <div class="p-5">
-
-                    <div class="text-center">
-                        <h1 class="h4 text-gray-900 mb-4">Ajouter un Utilisateur</h1>
-                    </div>
-
-                    @if (session()->has('success'))
-                        <div class="alert alert-success text-center"> {{ session('success') }}</div>
-                    @endif
-
-
-                    <form class="user" method="post" action="{{ route('create_user') }}">
-                        @csrf
-                        <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                    name="name" placeholder="Nom complet">
-                                @error('name')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                    name="email" placeholder="Email@">
-                                @error('email')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input type="password" class="form-control form-control-user" name="ps1"
-                                    id="exampleInputPassword" placeholder="Mot de passe">
-                                @error('ps1')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="password" class="form-control form-control-user" name="ps1_confirmation"
-                                    id="exampleRepeatPassword" placeholder="Retaper le M.D.P">
-                                @error('ps1_confirmation')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-
-
-                        <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <select class="form-control   p-4 " name="role">
-                                    <option value=""> </option>
-                                    <option value="admin"> Admin </option>
-                                    <option value="commercial"> Commercial </option>
-                                </select>
-                                @error('role')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input type="tel" class="form-control form-control-user" id="tlf"
-                                    name="tlf" placeholder="téléphone">
-                                @error('tlf')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-user btn-block">
-                            Ajouter
-                        </button>
-
-
-                    </form>
-
-                    <hr>
-
-                    @if (count($commerciaux) > 0)
-                        <div class="mt-2 mb-5  ">
-                            <h1 class="text-center"> Liste des commerciaux </h1>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">id</th>
-                                        <th scope="col">Nom</th>
-                                        <th scope="col">solde</th>
-                                        <th scope="col">téléphone </th>
-                                        <th scope="col">Email </th>
-                                        <th scope="col"> Action </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    @foreach ($commerciaux as $commercial)
-                                        <tr>
-                                            <th scope="row"> {{ $commercial->id }} </th>
-                                            <td>{{ $commercial->name }} </td>
-                                            <td>{{ $commercial->solde }} DA </td>
-                                            <td>{{ $commercial->tlf }} </td>
-                                            <td>{{ $commercial->email }} </td>
-                                            <td>
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="fas fa-pen-square"></i>
-                                                </button>
-
-
-                                            </td>
-
-                                        </tr>
-                                    @endforeach
-
-                                </tbody>
-                            </table>
-                            <div>
-                                {{ $commerciaux->links() }}
-                            </div>
-                        </div>
-                        <hr>
-                    @endif
-
-                    @if (count($admins) > 0)
-                        <div class="mt-5 mb-2">
-                            <h1 class="text-center"> Liste des Admins </h1>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">id</th>
-                                        <th scope="col">Nom</th>
-                                        <th scope="col">solde</th>
-                                        <th scope="col">téléphone </th>
-                                        <th scope="col"> Email </th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    @foreach ($admins as $admin)
-                                        <tr>
-                                            <th scope="row"> {{ $admin->id }} </th>
-                                            <td>{{ $admin->name }} </td>
-                                            <td>{{ $admin->solde }} DA </td>
-                                            <td>{{ $admin->tlf }} </td>
-                                            <td>{{ $admin->email }} </td>
-                                        </tr>
-                                    @endforeach
-
-                                </tbody>
-                            </table>
-                            <div>
-                                {{ $commerciaux->links() }}
-                            </div>
-                        </div>
-                    @endif
-
-
-                </div>
-
-
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <div class="card card-stats card-round">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-icon">
+                        <div class="icon-big text-center icon-info bubble-shadow-small">
+                            <i class="fas fa-store"></i>
+                        </div>
+                    </div>
+                    <div class="col col-stats ms-3 ms-sm-0">
+                        <div class="numbers">
+                            <p class="card-category">Store</p>
+                            <h4 class="card-title">{{  $nb_stores   }}</h4>
+                        </div>
                     </div>
                 </div>
-            </footer>
-            <!-- End of Footer -->
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="container">
+    @if ( session() -> has('success') )
+    <div class="alert alert-success text-center bg-success text-white">
+        {{ session('success') }}
+    </div>
+    @endif
+
+    <h1 class="text-center"> Ajouter un utilisateur </h1>
+    <form method="post" action="{{ route('create_user') }}">
+        @csrf
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="inputEmail4">Email</label>
+                <input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email" required>
+                @error('email')
+                <span class="text-danger"> {{ $message }} </span>
+                @enderror
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputPassword4">Mot de passe</label>
+                <input type="password" class="form-control" id="inputPassword4" placeholder="Mot de passe" name="ps1"
+                    required>
+                @error('ps1')
+                <span class="text-danger"> {{ $message }} </span>
+                @enderror
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputPassword5">Retapez le MDP</label>
+                <input type="password" class="form-control" id="inputPassword5" placeholder="Mot de passe"
+                    name="ps1_confirmation" required>
+                @error('ps1_confirmation')
+                <span class="text-danger"> {{ $message }} </span>
+                @enderror
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="name">Nom complet</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+                @error('name')
+                <span class="text-danger"> {{ $message }} </span>
+                @enderror
+            </div>
+            <div class="form-group col-md-4">
+                <label for="tlf">Téléphone</label>
+                <input type="tel" class="form-control" id="tlf" name="tlf" required>
+                @error('tlf')
+                <span class="text-danger"> {{ $message }} </span>
+                @enderror
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputState">Role</label>
+                <select id="inputState" class="form-control" name="role" required>
+                    <option selected> </option>
+                    <option value="admin"> Admin</option>
+                    <option value="commercial"> Commercial</option>
+                </select>
+                @error('role')
+                <span class="text-danger"> {{ $message }} </span>
+                @enderror
+            </div>
 
         </div>
-        <!-- End of Content Wrapper  ======= -->
 
+        <button type="submit" class="btn btn-primary w-100 mt-2 mb-3"> Ajouter </button>
+    </form>
+    <hr>
+
+    <h1 class="text-center"> Liste des Admins </h1>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="basic-datatables" class="display table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th>Action </th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>id</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th> Action </th>
+                    </tr>
+                </tfoot>
+                <tbody>
+
+                    @foreach ($admins as $admin)
+                    <tr>
+                        <td> {{ $admin -> id }} </td>
+                        <td> {{ $admin -> name }} </td>
+                        <td> {{ $admin -> email }} </td>
+                        <td> {{ $admin -> tlf }} </td>
+                        <td> 
+
+                           <button class="btn  btn-primary  p-2"  > <i class="fas fa-pen-square"></i> </button>
+                           <button class="btn  btn-danger  p-2"    > <i class="fas fa-trash"></i> </button>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
-    <!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+
+    <hr class="mt-5 mb-5" >
+
+    <h1 class="text-center"> Liste des Commerciaux </h1>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="basic-datatables2" class="display table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th>Solde</th>
+                        <th>Action </th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th>Solde</th>
+                        <th> Action </th>
+                    </tr>
+                </tfoot>
+                <tbody>
+
+                    @foreach ($commerciaux as $commercial)
+                    <tr>
+                        <td> {{ $commercial -> id }} </td>
+                        <td> {{ $commercial -> name }} </td>
+                        <td> {{ $commercial -> email }} </td>
+                        <td> {{ $commercial -> tlf }} </td>
+                        <td> {{ $commercial -> solde }} Da</td>
+                        <td> 
+
+                           <button class="btn  btn-primary  p-2"  > <i class="fas fa-pen-square"></i> </button>
+                           <button class="btn  btn-danger  p-2"    > <i class="fas fa-trash"></i> </button>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
 
 
 @endsection
 
 @section('js')
-    <script></script>
+
+<script>
+    $(document).ready(function () {
+        $("#basic-datatables").DataTable({});
+
+        $("#basic-datatables2").DataTable({});
+
+        $("#multi-filter-select").DataTable({
+          pageLength: 5,
+          initComplete: function () {
+            this.api()
+              .columns()
+              .every(function () {
+                var column = this;
+                var select = $(
+                  '<select class="form-select"><option value=""></option></select>'
+                )
+                  .appendTo($(column.footer()).empty())
+                  .on("change", function () {
+                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                    column
+                      .search(val ? "^" + val + "$" : "", true, false)
+                      .draw();
+                  });
+
+                column
+                  .data()
+                  .unique()
+                  .sort()
+                  .each(function (d, j) {
+                    select.append(
+                      '<option value="' + d + '">' + d + "</option>"
+                    );
+                  });
+              });
+          },
+        });
+
+        // Add Row
+        $("#add-row").DataTable({
+          pageLength: 5,
+        });
+
+        var action =
+          '<td> <div class="form-button-action"> <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
+
+        $("#addRowButton").click(function () {
+          $("#add-row")
+            .dataTable()
+            .fnAddData([
+              $("#addName").val(),
+              $("#addPosition").val(),
+              $("#addOffice").val(),
+              action,
+            ]);
+          $("#addRowModal").modal("hide");
+        });
+      });
+</script>
+
 @endsection
