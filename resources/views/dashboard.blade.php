@@ -105,8 +105,8 @@ dashboard
                 @enderror
             </div>
             <div class="form-group col-md-4">
-                <label for="tlf">Téléphone</label>
-                <input type="tel" class="form-control" id="tlf" name="tlf" required>
+                <label for="telephone">Téléphone</label>
+                <input type="tel" class="form-control" id="telephone" name="tlf" required>
                 @error('tlf')
                 <span class="text-danger"> {{ $message }} </span>
                 @enderror
@@ -115,8 +115,8 @@ dashboard
                 <label for="inputState">Role</label>
                 <select id="inputState" class="form-control" name="role" required>
                     <option selected> </option>
-                    <option value="admin"> Admin</option>
-                    <option value="commercial"> Commercial</option>
+                    <option value="admin"> Admin </option>
+                    <option value="commercial"> Commercial </option>
                 </select>
                 @error('role')
                 <span class="text-danger"> {{ $message }} </span>
@@ -160,8 +160,7 @@ dashboard
                         <td> {{ $admin -> name }} </td>
                         <td> {{ $admin -> email }} </td>
                         <td> {{ $admin -> tlf }} </td>
-                        <td> 
-
+                        <td>
                            <button class="btn  btn-primary  p-2"  > <i class="fas fa-pen-square"></i> </button>
                            <button class="btn  btn-danger  p-2"    > <i class="fas fa-trash"></i> </button>
                         </td>

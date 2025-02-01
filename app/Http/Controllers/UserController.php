@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
-
-
+use App\Models\Store;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
@@ -21,28 +20,27 @@ class UserController extends StoreController
 {
 
 
-    public function dashboard() {
-        $store_users = User::where('role' , "prop_store" )->  
-        orderBy('created_at', 'desc') -> paginate(10) ;
+    public function dashboard()
+    {
+        $store_users = User::where('role', "prop_store")->orderBy('created_at', 'desc')->paginate(10);
 
-        $commerciaux = User::where('role' , "commercial" ) -> 
-        orderBy('created_at', 'desc') -> paginate(10) ;
+        $commerciaux = User::where('role', "commercial")->orderBy('created_at', 'desc')->paginate(10);
 
-        $admins = User::where('role' , "admin" ) -> 
-        orderBy('created_at', 'desc') -> paginate(10) ;
+        $admins = User::where('role', "admin")->orderBy('created_at', 'desc')->paginate(10);
 
-        $nb_stores = $this -> get_nb_stores() ;
+        $nb_stores = $this->get_nb_stores();
 
-        return  view("dashboard" , compact("store_users" , "commerciaux" , 'admins', "nb_stores" )  ) ;
+        return  view("dashboard", compact("store_users", "commerciaux", 'admins', "nb_stores"));
     }
 
 
 
-    public function delete_user( $id ) {
-         
-        User::find($id) -> delete( ) ;
+    public function delete_user($id)
+    {
 
-        return  view("dashboard" )  -> with("success"  , "utilisateur supprimé" ) ;
+        User::find($id)->delete();
+
+        return  view("dashboard")->with("success", "utilisateur supprimé");
     }
 
 
@@ -54,7 +52,7 @@ class UserController extends StoreController
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'ps1' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
             'role' => ['required', 'string', 'in:admin,commercial,prop_store'],
-            'tlf' => ['required', 'numeric' ],
+            'tlf' => ['required', 'numeric'],
         ]);
 
         // get_all_store_users
@@ -68,21 +66,68 @@ class UserController extends StoreController
             'password' =>  $validated['ps1'],
             'role' => $validated['role'],
             'tlf' => $validated['tlf'],
-            
+
         ]);
 
 
         // return dd($request-> all() ) ;
 
         return redirect()->route('dashboard')->with('success', 'Utilisateur ajouté');
-
     }
 
 
-    public function get_all_store_users() {
-        $store_users = User::where('role' , "prop_store" )  ;
-        return $store_users ;
+    public function get_all_store_users()
+    {
+        $store_users = User::where('role', "prop_store");
+        return $store_users;
     }
+
+    public function create_store_page()
+    {
+        $store_users = User::where('role', "prop_store");
+        return  view("commercials.create_store_page");
+    }
+
+
+
+    public function create_store( UserRequest $request )
+    {
+
+
+        $id_user = User::create([
+            'name' => $request ->name,
+            'email' => $request ->email ,
+            'password' => $request->password,
+            'tlf' => $request->tlf,
+            'adresse' => $request->adresse,
+            'role' =>  'prop_store' , 
+        ]) ;
+
+        if( $id_user ) {
+
+             Store::create([
+                'store_name' => $request->store_name,
+                'id_added_by_com' =>  Auth::user()-> id  ,
+                'id_prop' => $id_user-> id ,      
+                'total_to_pay' => 0 ,      
+            ]);
+
+            return redirect()-> back()-> with("success" , "Store ajouté" ) ;
+        }else {
+
+            return redirect()->back()->with("error", "Erreur ");
+
+        }
+
+        return  view("commercials.create_store_page");
+    }
+
+
+ 
+
+
+
+
 
 
 }

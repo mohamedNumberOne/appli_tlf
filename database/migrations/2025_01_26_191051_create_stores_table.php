@@ -21,7 +21,6 @@ return new class extends Migration
             $table->foreign("id_added_by_com")->references('id')->on('users')->onDelete('SET NULL');
             $table->foreign("id_prop")->references('id')->on('users')->onDelete('SET NULL');
 
-
             $table->timestamps();
         });
     }
