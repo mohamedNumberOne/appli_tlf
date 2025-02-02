@@ -148,7 +148,7 @@
                              <div class="collapse" id="dashboard">
                                  <ul class="nav nav-collapse">
                                      <li>
-                                         <a href="{{ route('dashboard') }}">
+                                         <a href="{{ route('dashboard_commercial') }}">
                                              <span class="sub-item">Dashboard </span>
                                          </a>
                                      </li>
@@ -170,8 +170,8 @@
                                          </a>
                                      </li>
                                       <li>
-                                         <a href="{{ route('liste_store') }}">
-                                             <span class="sub-item">Liste </span>
+                                         <a href="{{ route('commercial_liste_store') }}">
+                                             <span class="sub-item">Mes stores </span>
                                          </a>
                                      </li>
                                  </ul>

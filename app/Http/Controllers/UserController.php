@@ -34,6 +34,15 @@ class UserController extends StoreController
     }
 
 
+    public function dashboard_commercial()
+    {
+
+        $nb_stores =  Store::where('id_added_by_com' , '=' , Auth::user() -> id  )  -> count() ;
+
+        return  view("commercials.dashboard_commercial", compact(  "nb_stores"));
+    }
+
+
 
     public function delete_user($id)
     {
@@ -84,12 +93,12 @@ class UserController extends StoreController
 
     public function create_store_page()
     {
-        $store_users = User::where('role', "prop_store");
+        
         return  view("commercials.create_store_page");
     }
 
-
-
+ 
+    
     public function create_store( UserRequest $request )
     {
 
@@ -113,13 +122,14 @@ class UserController extends StoreController
             ]);
 
             return redirect()-> back()-> with("success" , "Store ajouté" ) ;
+
         }else {
 
             return redirect()->back()->with("error", "Erreur ");
 
         }
 
-        return  view("commercials.create_store_page");
+        return  view("commercials.create_store_page") ->with("error", "Erreur ");
     }
 
 

@@ -65,7 +65,6 @@
                                             <i class="fas fa-pen-square"></i>
                                         </button>
                                     </td> --}}
-
                                 </tr>
                             @endforeach
 

@@ -73,10 +73,10 @@
               <li class="nav-item topbar-user dropdown hidden-caret">
                 <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
                   <div class="avatar-sm">
-                    <img src="{{ asset('assets/img/profile.jpg') }}" alt="..." class="avatar-img rounded-circle" />
+                    <img src="{{ asset('assets/img/avatar.jpg') }}" alt="..." class="avatar-img rounded-circle" />
                   </div>
                   <span class="profile-username">
-                    <span class="op-7">Hi,</span>
+                 
                     <span class="fw-bold">     {{ Auth::user() -> name }} </span>
                   </span>
                 </a>
@@ -88,7 +88,7 @@
                           <img src="{{ asset('assets/img/profile.jpg') }}" alt="image profile" class="avatar-img rounded" />
                         </div>
                         <div class="u-text">
-                          <h4>Hizrian</h4>
+                          <h4> {{ Auth::user() -> name }}  </h4>
                           <p class="text-muted">     {{ Auth::user() -> email }}</p>
                         
                         </div>
@@ -132,10 +132,7 @@
       <footer class="footer">
         <div class="container-fluid d-flex justify-content-between">
            
-          <div class="copyright">
-            2024, made with <i class="fa fa-heart heart text-danger"></i> by
-            <a href="http://www.themekita.com">ThemeKita</a>
-          </div>
+         
           
         </div>
       </footer>

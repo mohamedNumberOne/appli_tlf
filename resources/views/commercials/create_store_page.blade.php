@@ -16,7 +16,6 @@
 @section('content')
     <div class="container">
 
-
         @if (session()->has('success'))
             <div class="alert alert-success text-center bg-success text-white">
                 {{ session('success') }}
@@ -32,8 +31,7 @@
         <h1 class="text-center"> Ajouter un Store </h1>
         <form method="post" action="{{ route('create_store') }}">
             @csrf
-
-
+            
             <div class="row">
                 <div class="form-group col-md-4">
                     <label for="store_name">Nom du magasin</label>

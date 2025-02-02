@@ -16,6 +16,7 @@ class StoreController extends Controller
         return $all_stores ;
     }
     
+
     public function liste_store()
     {
         $all_stores = 
@@ -38,9 +39,24 @@ class StoreController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function commercial_liste_store()
     {
-        //
+        $all_stores = 
+        Store::join('users as owner', 'stores.id_prop', '=', 'owner.id') // Jointure pour obtenir le propriétaire
+            ->join('users as commercial', 'stores.id_added_by_com', '=', 'commercial.id') // Jointure pour obtenir le commercial
+            ->select(
+                'stores.store_name',
+                'stores.id as store_id',
+                'owner.name as prop_name', // Nom du propriétaire
+                'owner.email as email_prop', // email du propriétaire
+                'owner.tlf as tlf_prop', // tlf du propriétaire
+                'commercial.name as commercial_name', // Nom du commercial
+                'stores.total_to_pay' //   total_to_pay
+            )
+            
+            ->orderBy('stores.created_at', "DESC")->paginate(10);
+            
+        return view("commercials.stores_liste", compact("all_stores"));
     }
 
     /**
