@@ -16,8 +16,9 @@ class VerifyIsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if( ! Auth::user() -> role == "admin" ) {
-            return redirect() -> route('dashboard') ;
+        if (Auth::user()->role != "admin") {
+            Auth::logout();
+            return redirect()->route('login')->with('error', 'vous netes pas un admin!');;
         }
 
         return $next($request);

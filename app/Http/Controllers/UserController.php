@@ -102,7 +102,6 @@ class UserController extends StoreController
     public function create_store( UserRequest $request )
     {
 
-
         $id_user = User::create([
             'name' => $request ->name,
             'email' => $request ->email ,

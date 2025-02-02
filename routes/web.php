@@ -17,7 +17,7 @@ Route::view('/', 'welcome');
 
 
 // ADMIN 
-Route::prefix("admin")->middleware("auth")->group(function () {
+Route::prefix("admin")->middleware(["auth", 'VerifyIsAdmin'])->group(function () {
 
     // Route::view('dashboard', 'dashboard')->middleware(['verified'])  -> name('dashboard'); 
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');  
