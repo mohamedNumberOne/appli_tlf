@@ -17,7 +17,7 @@ Route::view('/', 'welcome');
 
 
 // ADMIN 
-Route::prefix("admin")->middleware(["auth", 'VerifyIsAdmin'])->group(function () {
+Route::prefix("admin")->middleware(["auth" ])->group(function () {
 
     // Route::view('dashboard', 'dashboard')->middleware(['verified'])  -> name('dashboard'); 
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');  
@@ -36,14 +36,10 @@ Route::prefix("admin")->middleware(["auth", 'VerifyIsAdmin'])->group(function ()
 });
 
 
+// VerifyIsPropStore 
 
 // Commercial 
-Route::prefix("commercial")->middleware("auth")->group(function () {
-
-
-    // Route::get('/paiement-store', [PaymentStoreComController::class, 'paiement_store_page'])->name('paiement_store');
-    // Route::get('/paiement-commerciaux', [PaymentComAdminController::class, 'paiement_commerciaux_page'])
-    //     ->name('paiement_commerciaux');
+Route::prefix("commercial")->middleware([ "auth" ])->group(function () {
 
     Route::get('/dashboard', [UserController::class, 'dashboard_commercial'])->name('dashboard_commercial');
     Route::get('/create-store', [UserController::class, 'create_store_page'])->name('create_store_page');
@@ -55,5 +51,7 @@ Route::prefix("commercial")->middleware("auth")->group(function () {
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
+
+
 
 require __DIR__ . '/auth.php';

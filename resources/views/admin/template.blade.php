@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>  @yield('title')   </title>
   <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
   <link rel="icon" href="{{asset('assets/img/kaiadmin/favicon.ico')}}" type="image/x-icon" />
-{{-- <link rel="stylesheet" href="{{ asset('assets/icones/all.css') }}">  --}}
+{{-- <link rel="stylesheet" href="{{ asset('assets/icones/all.css') }}">  --}} 
   <!-- Fonts and icons -->
-  <script src="{{asset('assets/js/plugin/webfont/webfont.min.js')}}"></script>
+  <script src="{{asset('assets/js/plugin/webfont/webfont.min.js')}}"></script> 
+  <link rel="stylesheet" href="{{ asset('assets/css/fonts.min.css') }}">
   <script>
     WebFont.load({
       google: { families: ["Public Sans:300,400,500,600,700"] },
@@ -77,7 +78,7 @@
                   </div>
                   <span class="profile-username">
                  
-                    <span class="fw-bold">     {{ Auth::user() -> name }} </span>
+                    <span class="fw-bold">    {{ Auth::user() -> name }} </span>
                   </span>
                 </a>
                 <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -89,8 +90,7 @@
                         </div>
                         <div class="u-text">
                           <h4> {{ Auth::user() -> name }}  </h4>
-                          <p class="text-muted">     {{ Auth::user() -> email }}</p>
-                        
+                          <p class="text-muted">   {{ Auth::user() -> email }} </p>
                         </div>
                       </div>
                     </li>
@@ -138,10 +138,6 @@
       </footer>
     </div>
 
-
-
-
-
   </div>
    
 
@@ -160,20 +156,20 @@
  <script src="{{asset('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js')}}"></script>
 
  <!-- Chart Circle -->
- <script src="{{asset('assets/js/plugin/chart-circle/circles.min.js')}}"></script>
+ {{-- <script src="{{asset('assets/js/plugin/chart-circle/circles.min.js')}}"></script>  --}}
 
  <!-- Datatables -->
  <script src="{{asset('assets/js/plugin/datatables/datatables.min.js')}}"></script>
 
  <!-- Bootstrap Notify -->
- <script src="{{asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
+ {{-- <script src="{{asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js')}}"></script>  --}}
 
  <!-- jQuery Vector Maps -->
  <script src="{{asset('assets/js/plugin/jsvectormap/jsvectormap.min.js')}}"></script>
- <script src="{{asset('assets/js/plugin/jsvectormap/world.js')}}"></script>
+ {{-- <script src="{{asset('assets/js/plugin/jsvectormap/world.js')}}"></script>  --}}
 
  <!-- Sweet Alert -->
- <script src="{{asset('assets/js/plugin/sweetalert/sweetalert.min.js')}}"></script>
+ {{-- <script src="{{asset('assets/js/plugin/sweetalert/sweetalert.min.js')}}"></script>  --}}
 
  <!-- Kaiadmin JS -->
  <script src="{{asset('assets/js/kaiadmin.min.js')}}"></script>
