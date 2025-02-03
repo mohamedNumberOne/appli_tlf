@@ -5,22 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\Store;
 use App\Http\Requests\StoreStoreRequest;
 use App\Http\Requests\UpdateStoreRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public   function get_nb_stores() {
+    public   function get_nb_stores()
+    {
         $all_stores = Store::count();
-        return $all_stores ;
+        return $all_stores;
     }
-    
+
 
     public function liste_store()
     {
-        $all_stores = 
-        Store::join('users as owner', 'stores.id_prop', '=', 'owner.id') // Jointure pour obtenir le propriétaire
+        $all_stores =
+            Store::join('users as owner', 'stores.id_prop', '=', 'owner.id') // Jointure pour obtenir le propriétaire
             ->join('users as commercial', 'stores.id_added_by_com', '=', 'commercial.id') // Jointure pour obtenir le commercial
             ->select(
                 'stores.store_name',
@@ -31,7 +33,7 @@ class StoreController extends Controller
                 'commercial.name as commercial_name', // Nom du commercial
                 'stores.total_to_pay' //   total_to_pay
             )
-            
+
             ->orderBy('stores.created_at', "DESC")->paginate(10);
         return view("admin.stores_liste", compact("all_stores"));
     }
@@ -41,8 +43,8 @@ class StoreController extends Controller
      */
     public function commercial_liste_store()
     {
-        $all_stores = 
-        Store::join('users as owner', 'stores.id_prop', '=', 'owner.id') // Jointure pour obtenir le propriétaire
+        $all_stores =
+            Store::join('users as owner', 'stores.id_prop', '=', 'owner.id') // Jointure pour obtenir le propriétaire
             ->join('users as commercial', 'stores.id_added_by_com', '=', 'commercial.id') // Jointure pour obtenir le commercial
             ->select(
                 'stores.store_name',
@@ -53,9 +55,11 @@ class StoreController extends Controller
                 'commercial.name as commercial_name', // Nom du commercial
                 'stores.total_to_pay' //   total_to_pay
             )
-            
-            ->orderBy('stores.created_at', "DESC")->paginate(10);
-            
+
+            ->orderBy('stores.created_at', "DESC")
+            ->where('stores.id_added_by_com', '=',  Auth::user()-> id )
+            ->paginate(10);
+
         return view("commercials.stores_liste", compact("all_stores"));
     }
 

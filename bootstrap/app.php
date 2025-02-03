@@ -14,9 +14,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->alias(['VerifyIsAdmin' => VerifyIsAdmin::class]);
-        $middleware->alias(['verifyIsCommercial' => verifyIsCommercial::class]);
-        $middleware->alias(['VerifyIsPropStore' => VerifyIsPropStore::class]);
+        // $middleware->append(VerifyIsAdmin::class); 
+        $middleware->alias([
+            'VerifyIsAdmin' =>  VerifyIsAdmin::class,
+            'verifyIsCommercial' => verifyIsCommercial::class,
+            'VerifyIsPropStore' => VerifyIsPropStore::class
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

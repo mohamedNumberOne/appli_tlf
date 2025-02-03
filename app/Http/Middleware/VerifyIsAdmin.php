@@ -18,7 +18,7 @@ class VerifyIsAdmin
     {
         if (Auth::user()->role != "admin") {
             Auth::logout();
-            return redirect()->route('login')->with('error', 'vous netes pas un admin!');;
+            return redirect()->route('login')->with('error', "vous n'êtes pas un admin!");
         }
 
         return $next($request);

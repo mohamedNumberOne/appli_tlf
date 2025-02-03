@@ -18,7 +18,7 @@ class verifyIsCommercial
     {
         if (Auth::user()->role != "commercial") {
             Auth::logout();
-            return redirect()->route('login')->with('error', 'vous netes pas un commercial!');;
+            return redirect()->route('login')->with( "error",  "vous n'êtes  pas un commercial! ");
         }
         return $next($request);
     }

@@ -18,7 +18,7 @@ class VerifyIsPropStore
     {
         if (Auth::user()->role != "prop_store") {
             Auth::logout();
-            return redirect()->route('login')->with('error', 'vous netes pas un Magasin!');;
+            return redirect()->route('login')->with("error",  "vous n'êtes  pas un Magasin!");
         }
         return $next($request);
     }

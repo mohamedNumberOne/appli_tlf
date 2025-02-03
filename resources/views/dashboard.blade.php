@@ -27,7 +27,7 @@
                         <div class="col col-stats ms-3 ms-sm-0">
                             <div class="numbers">
                                 <p class="card-category">Commerciaux</p>
-                                <h4 class="card-title"> {{ count($commerciaux) }} </h4>
+                                <h4 class="card-title"> {{ count($commerciaux) }} </h4> 
                             </div>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                         <div class="col col-stats ms-3 ms-sm-0">
                             <div class="numbers">
                                 <p class="card-category">Store</p>
-                                <h4 class="card-title">{{ $nb_stores }}</h4>
+                                <h4 class="card-title">{{ $nb_stores }}</h4> 
                             </div>
                         </div>
                     </div>
@@ -151,7 +151,7 @@
                         </tr>
                     </tfoot>
                     <tbody>
-
+ 
                         @foreach ($admins as $admin)
                             <tr>
                                 <td> {{ $admin->id }} </td>
@@ -163,7 +163,7 @@
                                     <button class="btn  btn-danger  p-2"> <i class="fas fa-trash"></i> </button>
                                 </td>
                             </tr>
-                        @endforeach
+                        @endforeach  
                     </tbody>
                 </table>
             </div>
@@ -212,7 +212,7 @@
                                     <button class="btn  btn-danger  p-2"> <i class="fas fa-trash"></i> </button>
                                 </td>
                             </tr>
-                        @endforeach
+                        @endforeach  
                     </tbody>
                 </table>
             </div>
@@ -223,10 +223,7 @@
 @endsection
 
 @section('js')
-    <script>
-        // Après une connexion réussie, rechargez la page ou mettez à jour le menu
-        // window.location.reload();
-    </script>
+    
     <script>
         $(document).ready(function() {
             $("#basic-datatables").DataTable({});

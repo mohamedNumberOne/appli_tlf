@@ -50,7 +50,7 @@
                         </tfoot>
                         <tbody>
 
-                            {{-- @foreach ($all_stores as $store)
+                            @foreach ($all_stores as $store)
                                 <tr>
                                     <th scope="row"> {{ $store->store_id }} </th>
                                     <td>{{ $store->store_name }} </td>
@@ -63,7 +63,7 @@
                                     </td>
                                  
                                 </tr>
-                            @endforeach --}}
+                            @endforeach
 
                         </tbody>
                     </table>

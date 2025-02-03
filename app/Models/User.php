@@ -25,11 +25,10 @@ class User extends Authenticatable
         'solde',
         'tlf',
         'adresse',
-        
+
 
     ];
 
- 
 
     /**
      * The attributes that should be hidden for serialization.
