@@ -59,8 +59,8 @@
 
                 @if ($pro->double_puce)
                     <div class="form-group col-md-4">
-                        <label for="imei1"> imei2 </label>
-                        <input class="form-control" id="imei1" name="imei2" required>
+                        <label for="imei2"> imei2 </label>
+                        <input class="form-control" id="imei2" name="imei2" required>
                         @error('imei2')
                             <span class="text-danger"> {{ $message }} </span>
                         @enderror
@@ -73,7 +73,7 @@
             <div class="row">
                 <div class="form-group col-md-4">
                     <label for="nom_client"> Nom client </label>
-                    <input type="number" class="form-control" id="nom_client" name="nom_client" required>
+                    <input type="text" class="form-control" id="nom_client" name="nom_client" required>
                     @error('nom_client')
                         <span class="text-danger"> {{ $message }} </span>
                     @enderror
