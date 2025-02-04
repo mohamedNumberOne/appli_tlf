@@ -132,10 +132,13 @@ class UserController extends StoreController
     }
 
 
- 
+    public function dashboard_store()
+    {
 
-
-
+        $info_store= Store::where('id_prop' , '=' , (Auth::user()-> id ))->get();;
+    
+        return  view("stores.dashboard_store" , compact('info_store') );
+    }
 
 
 

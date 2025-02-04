@@ -6,6 +6,7 @@ use App\Http\Controllers\PaymentStoreComController;
 use App\Http\Controllers\PaymentComAdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\SaleController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -60,6 +61,7 @@ Route::prefix("commercial")->middleware(["auth" , "verifyIsCommercial" ])->group
 Route::prefix("store")->middleware(["auth" , "VerifyIsPropStore"])->group(function () {
 
     Route::get('/dashboard', [UserController::class, 'dashboard_store'])->name('dashboard_store');
+    Route::get('/ajouter-vente', [SaleController::class, 'ajouter_vente_page'])->name('ajouter_vente_page');
  
 });
 
