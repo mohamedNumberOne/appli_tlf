@@ -23,7 +23,7 @@ class StoreController extends Controller
     {
         $all_stores =
             Store::join('users as owner', 'stores.id_prop', '=', 'owner.id') // Jointure pour obtenir le propriétaire
-            ->join('users as commercial', 'stores.id_added_by_com', '=', 'commercial.id') // Jointure pour obtenir le commercial
+            ->leftJoin('users as commercial', 'stores.id_added_by_com', '=', 'commercial.id') // Jointure pour obtenir le commercial
             ->select(
                 'stores.store_name',
                 'stores.id as store_id',
@@ -34,7 +34,7 @@ class StoreController extends Controller
                 'stores.total_to_pay' //   total_to_pay
             )
 
-            ->orderBy('stores.created_at', "DESC")->paginate(10);
+            ->orderBy('stores.created_at', "DESC")->paginate(15);
         return view("admin.stores_liste", compact("all_stores"));
     }
 
@@ -58,7 +58,7 @@ class StoreController extends Controller
 
             ->orderBy('stores.created_at', "DESC")
             ->where('stores.id_added_by_com', '=',  Auth::user()-> id )
-            ->paginate(10);
+            ->paginate(15);
 
         return view("commercials.stores_liste", compact("all_stores"));
     }

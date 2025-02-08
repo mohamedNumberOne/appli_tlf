@@ -59,7 +59,12 @@
                                     <td>{{ $store->tlf_prop }} </td>
                                     <td>{{ $store->email_prop }} </td>
                                     <td>
-                                        {{ $store->commercial_name }}
+                                       @if  ( $store->commercial_name == NULL  )
+                                      <span class="text-danger" >   Commercial supprimé </span>
+                                       @else 
+                                          {{ $store->commercial_name }}
+                                       @endif  
+                                     
                                     </td>
                                     {{-- <td> <button type="submit" class="btn btn-primary p-2">
                                             <i class="fas fa-pen-square"></i>
@@ -72,6 +77,8 @@
                     </table>
                 </div>
             </div>
+
+                {{ $all_stores-> links() }}
         @else
             <div class="alert alert-warning bg-warning text-center text-white"> pas de stores </div>
         @endif
@@ -85,7 +92,7 @@
 @section('js')
     <script>
         $(document).ready(function() {
-            $("#basic-datatables").DataTable({});
+            $("#basic-datatables").DataTable({}); 
 
 
             $("#multi-filter-select").DataTable({
@@ -135,9 +142,9 @@
                         $("#addName").val(),
                         $("#addPosition").val(),
                         $("#addOffice").val(),
-                        action,
+                        action, 
                     ]);
-                $("#addRowModal").modal("hide");
+                $("#addRowModal").modal("hide"); 
             });
         });
     </script>

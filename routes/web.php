@@ -35,14 +35,27 @@ Route::prefix("admin")->middleware([ "auth" , "VerifyIsAdmin" ])->group(function
     Route::get('/paiement-store', [PaymentStoreComController::class, 'paiement_store_page'])->name('paiement_store');
     Route::get('/paiement-commerciaux', [PaymentComAdminController::class, 'paiement_commerciaux_page'])
         ->name('paiement_commerciaux');
+
+        // produits
     Route::get('/ajouter-produit', [ProductController::class, 'ajouter_produit_page'])->name('ajouter_produit');
     Route::get('/modifier-produit/{id}', [ProductController::class, 'modifier_produit_page'])->name('modifier_produit_page');
     Route::post('/modifier-produit/{id}', [ProductController::class, 'modifier_produit'])->name('modifier_produit');
     Route::delete('/supp-produit/{id}', [ProductController::class, 'supp_produit'])->name('supp_produit');
-    Route::post('/create_user', [UserController::class, 'create_user'])->name('create_user');
     Route::post('/add_product', [ProductController::class, 'add_product'])->name('add_product');
-    Route::get('/store-liste', [StoreController::class, 'liste_store'])->name('liste_store');
+    
 
+    // users
+    Route::post('/create_user', [UserController::class, 'create_user'])->name('create_user');
+    Route::get('/update-admin/{id}', [UserController::class, 'update_admin_page'])->name('update_admin_page');
+    Route::get('/update-commercial/{id}', [UserController::class, 'update_commercial_page'])->name('update_commercial_page');
+    Route::post('/update_admin/{id}', [UserController::class, 'update_admin'])->name('update_admin');
+    Route::post('/update_commercial/{id}', [UserController::class, 'update_commercial'])->name('update_commercial');
+    Route::delete('/delete_user/{id}', [UserController::class, 'delete_user'])->name('delete_user');
+
+    
+
+    Route::get('/store-liste', [StoreController::class, 'liste_store'])->name('liste_store');
+    
 });
 
 

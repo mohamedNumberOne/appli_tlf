@@ -27,7 +27,7 @@
                         <div class="col col-stats ms-3 ms-sm-0">
                             <div class="numbers">
                                 <p class="card-category">Commerciaux</p>
-                                <h4 class="card-title"> {{ count($commerciaux) }} </h4> 
+                                <h4 class="card-title"> {{ count($commerciaux) }} </h4>
                             </div>
                         </div>
                     </div>
@@ -46,13 +46,35 @@
                         <div class="col col-stats ms-3 ms-sm-0">
                             <div class="numbers">
                                 <p class="card-category">Store</p>
-                                <h4 class="card-title">{{ $nb_stores }}</h4> 
+                                <h4 class="card-title">{{ $nb_stores }}</h4>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="col-sm-6 col-md-3">
+            <div class="card card-stats card-round">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-icon">
+                            <div class="icon-big text-center icon-secondary bubble-shadow-small">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                        </div>
+                        <div class="col col-stats ms-3 ms-sm-0">
+                            <div class="numbers">
+                                <p class="card-category">Gain Mensuel</p>
+                                <h4 class="card-title"> total / à la caisse </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
     </div>
 
@@ -61,6 +83,12 @@
         @if (session()->has('success'))
             <div class="alert alert-success text-center bg-success text-white">
                 {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session()->has('error'))
+            <div class="alert alert-danger text-center bg-danger text-white">
+                {{ session('error') }}
             </div>
         @endif
 
@@ -151,7 +179,7 @@
                         </tr>
                     </tfoot>
                     <tbody>
- 
+
                         @foreach ($admins as $admin)
                             <tr>
                                 <td> {{ $admin->id }} </td>
@@ -159,11 +187,58 @@
                                 <td> {{ $admin->email }} </td>
                                 <td> {{ $admin->tlf }} </td>
                                 <td>
-                                    <button class="btn  btn-primary  p-2"> <i class="fas fa-pen-square"></i> </button>
-                                    <button class="btn  btn-danger  p-2"> <i class="fas fa-trash"></i> </button>
+
+                                    <a class="btn  btn-primary  p-2" href="{{ route('update_admin_page', $admin->id) }}">
+                                        <i class="fas fa-pen-square"></i>
+                                    </a>
+
+
+
+
+
+
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-danger p-2" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Confirmation ?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary"
+                                                        data-bs-dismiss="modal">Annuler</button>
+                                                    <form action="{{ route('delete_user', $admin->id) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger"> supprimer </button>
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
                                 </td>
                             </tr>
-                        @endforeach  
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -208,11 +283,54 @@
                                 <td> {{ $commercial->solde }} Da</td>
                                 <td>
 
-                                    <button class="btn  btn-primary  p-2"> <i class="fas fa-pen-square"></i> </button>
-                                    <button class="btn  btn-danger  p-2"> <i class="fas fa-trash"></i> </button>
+                                    <a class="btn  btn-primary  p-2"
+                                        href="{{ route('update_commercial_page', $commercial->id) }}">
+                                        <i class="fas fa-pen-square"></i>
+                                    </a>
+
+
+
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-danger p-2" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal{{$commercial->id}}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal{{$commercial->id}}" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Confirmation ?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary"
+                                                        data-bs-dismiss="modal">Annuler</button>
+                                                    <form action="{{ route('delete_user', $commercial->id) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger"> supprimer </button>
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
                                 </td>
                             </tr>
-                        @endforeach  
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -223,7 +341,6 @@
 @endsection
 
 @section('js')
-    
     <script>
         $(document).ready(function() {
             $("#basic-datatables").DataTable({});
