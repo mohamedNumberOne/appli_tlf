@@ -56,8 +56,6 @@ class UserController extends StoreController
 
             if (($user->role) != "admin") {
 
-              
-
                 $user->delete();
                 return  redirect()->back()->with("success", "utilisateur supprimé");
 

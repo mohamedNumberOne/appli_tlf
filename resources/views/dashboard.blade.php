@@ -193,18 +193,14 @@
                                     </a>
 
 
-
-
-
-
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-danger p-2" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal">
+                                        data-bs-target="#exampleModal{{$admin->id}}">
                                         <i class="fas fa-trash"></i>
                                     </button>
 
                                     <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                    <div class="modal fade" id="exampleModal{{$admin->id}}" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
