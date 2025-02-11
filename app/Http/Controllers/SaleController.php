@@ -6,7 +6,7 @@ use App\Models\Sale;
 use App\Models\Product;
 use App\Http\Requests\StoreSaleRequest;
 use App\Http\Requests\UpdateSaleRequest;
-use Illuminate\Http\Request ;
+use Illuminate\Http\Request;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Auth as Auth_user;
 
@@ -29,61 +29,76 @@ class SaleController extends Controller
     {
 
 
-        $pro = Product::find($request->product_id);
-        $imei2 =   NULL;
-        $validated = $request->validate([]) ;
+        $id_pro = $request->product_id;
 
-        $validated = [
-            'product_id' => 'required|exists:products,id|numeric',
-            'seller_id' => 'required|exists:users,id|numeric', 
-            'imei1' => 'required|digits:15|unique:sales,imei1',
-            'sn' => 'required|string',
-            'info_product_img' => 'required|file|image|mimes:jpeg,png,jpg,gif,bmp,webp',
-            'nom_client' => 'required|string',
-            'tlf_client' => 'required|digits_between:8,15',
-        ];
+        $pro = Product::find($id_pro);
 
-        if ($pro->double_puce) {
-            $imei2 = $request->imei2;
-            $validated = ['imei2' => 'required|digits:15|unique:sales,imei2'];
-        }
-      
-      
-
-        if ($validated) {
+        if ($pro) {
 
 
-            if ($request->hasFile('info_product_img')  &&  $request->file('info_product_img')->isValid()) {
+            $imei2 =   NULL;
 
-                $file = $request->file('info_product_img');
-                $info_product_img = $file->store('img_sale_phones', 'public');
-            } else {
-                $info_product_img  = NULL;
+            // Définition des règles de validation
+            $rules = [
+                'product_id' => 'required|exists:products,id',
+
+                'imei1' => 'required|digits:15|unique:sales,imei1',
+                'sn' => 'required|string|max:255',
+                'info_product_img' => 'required|file|image|mimes:jpeg,png,jpg,gif,bmp,webp|max:2048',
+                'nom_client' => 'required|string|max:255',
+                'tlf_client' => 'required|digits_between:8,15',
+            ];
+
+            // Ajouter la validation de imei2 si le produit est double puce
+            if ($pro->double_puce) {
+                $rules['imei2'] = 'required|digits:15|unique:sales,imei2';
             }
 
+            $validated = $request->validate(
+                $rules,
+                [
+                    'product_id.exists' => 'le produit n\'existe pas',
+                    'imei1.digits' => 'IMEI1 doit contenir 15 chiffres',
+                    'imei2.digits' => 'IMEI2 doit contenir 15 chiffres',
+                    'imei1.unique' => 'IMEI1 existe déja !',
+                    'imei2.unique' => 'IMEI2  existe déja !'
+                ]
+            );
 
 
-            $seller_id =  Auth_user::user()->id;
 
-            Sale::create([
+            if ($validated) {
 
-                'product_id' => $request->product_id,
-                'seller_id' =>   $seller_id ,
-                'imei1' => $request->imei1,
-                'imei2' => $imei2,
-                'sn' => $request->sn,
-                'info_product_img' => $info_product_img,
-                'nom_client' => $request->nom_client,
-                'tlf_client' => $request->tlf_client,
+                if ($request->hasFile('info_product_img')  &&  $request->file('info_product_img')->isValid()) {
 
-            ]);
+                    $file = $request->file('info_product_img');
+                    $info_product_img = $file->store('img_sale_phones', 'public');
+                } else {
+                    $info_product_img  = NULL;
+                }
 
-            return redirect()->back()->with('success', 'produit vendu avec succés');
-        }else {
-            return redirect()->back()->with('error', 'Erreur!');
 
+                $seller_id = Auth_user::user()->id;
+                Sale::create([
+
+                    'product_id' => $request->product_id,
+                    'seller_id' =>   $seller_id,
+                    'imei1' => $request->imei1,
+                    'imei2' => $imei2,
+                    'sn' => $request->sn,
+                    'info_product_img' => $info_product_img,
+                    'nom_client' => $request->nom_client,
+                    'tlf_client' => $request->tlf_client,
+
+                ]);
+
+                return redirect()->back()->with('success', 'produit vendu avec succés');
+            } else {
+                return redirect()->back()->with('error', 'Erreur!');
+            }
+        } else {
+            return redirect()->back()->with('error', 'Erreur produit non trouvé!');
         }
-
     }
 
     /**

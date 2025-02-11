@@ -20,6 +20,7 @@
     <div class="container">
 
 
+
         @if (session()->has('success'))
             <div class="alert alert-success text-center bg-success text-white">
                 {{ session('success') }}
@@ -44,7 +45,10 @@
                     <select id="product_id" name="product_id" class="form-control">
                         <option value="">
                             @foreach ($all_pro as $pro)
-                        <option value="{{ $pro->id }}"> {{ $pro->product_name }} </option>
+                        <option value="{{ $pro->id }}" {{ old('product_id') == $pro->id ? 'selected' : '' }}
+                            {{ $pro->double_puce == 1 ? 'data-dp=true' : '' }}>
+                            {{ $pro->product_name }}
+                        </option>
                         @endforeach
                     </select>
 
@@ -67,7 +71,7 @@
                 <div class='form-group col-md-4' id="pro_info">
 
                     <label for='imei2'> imei2 </label>
-                    <input class='form-control' id='imei2' name='imei2' required maxlength='15'  value="{{ old('imei2') }}">
+                    <input class='form-control' id='imei2' name='imei2' maxlength='15' value="{{ old('imei2') }}">
                     @error('imei2')
                         <span class="text-danger"> {{ $message }} </span>
                     @enderror
@@ -126,11 +130,22 @@
 @endsection
 
 @section('js')
-    {{-- <script>
+    <script>
+        var productId = document.getElementById('product_id');
+
+        var selectedOption = productId.options[productId.selectedIndex];
+        var imei2 = document.getElementById('imei2');
+
+        // Vérifier la valeur et l'attribut data-dp de l'option sélectionnée
+        if (!(selectedOption.value != "" && selectedOption.getAttribute('data-dp') == "true")) {
+
+            imei2.value = "";
+            imei2.disabled = 1;
+        }  
+
         $(document).ready(function() {
             $('#product_id').change(function() {
 
-                $('#pro_info').html('Chargement..');
                 var productId = $(this).val();
                 if (productId) {
                     var url = "{{ route('get_info_pro_ajax', ':id') }}".replace(':id', productId);
@@ -145,22 +160,17 @@
 
                         success: function(response) {
 
-                            if (response.double_puce == 1) {
-                                $('#pro_info').html(` 
-                                <label for='imei2'> imei2 </label> 
-                                <input class='form-control' id='imei2' name='imei2' required maxlength='15' > 
-                                @error('imei2')
-                                    <span class="text-danger"> {{ $message }} </span>
-                                @enderror
-                                `);
+                            if (!response.double_puce == 1) {
+                                imei2.value = "";
+                                imei2.disabled = 1;
                             } else {
-                                $('#pro_info').html('');
+                                imei2.disabled = 0;
                             }
 
 
                         },
                         error: function(xhr) {
-                            console.log('err');
+                            alert('err');
 
                         }
                     });
@@ -170,7 +180,7 @@
                 }
             });
         });
-    </script> --}}
+    </script>
 
     {{--   data table  --}}
 
