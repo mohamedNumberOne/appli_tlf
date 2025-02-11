@@ -96,11 +96,11 @@
                                              <span class="sub-item">Liste</span>
                                          </a>
                                      </li>
-                                     <li>
+                                     {{-- <li>
                                          <a href="icon-menu.html">
                                              <span class="sub-item">Catégories</span>
                                          </a>
-                                     </li>
+                                     </li> --}}
                                  </ul>
                              </div>
                          </li>
@@ -238,7 +238,7 @@
                                          </a>
                                      </li>
                                       <li>
-                                         <a href="{{ route('commercial_liste_store') }}">
+                                         <a href="{{ route('ajouter_vente_page') }}">
                                              <span class="sub-item">Mes ventes </span>
                                          </a>
                                      </li>

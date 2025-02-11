@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Process;
 
 class ProductController extends Controller
 {
+    
+    public function get_info_pro_ajax($id)
+    {
+        $pro_info = Product::find($id) ; 
+        return response()  -> json( $pro_info   ) ;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -19,7 +25,7 @@ class ProductController extends Controller
         $all_pro = Product::join('categories', 'categories.id', '=', "products.category_id")
             ->join('brands', 'brands.id', '=', "products.brand_id")
             ->select('*', "products.id as pro_id")
-            ->get();
+            ->paginate(15);
         $all_categories = Category::all();
         $all_brand = Brand::all();
         return view('admin.ajouter_produit', compact("all_pro", 'all_categories', 'all_brand'));

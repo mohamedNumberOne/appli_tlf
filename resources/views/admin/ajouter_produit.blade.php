@@ -204,6 +204,7 @@
                     </table>
                 </div>
             </div>
+            {{ $all_pro -> links() }}
         @else
             <div class="alert alert-warning bg-warning text-center text-white"> pas de produits </div>
         @endif

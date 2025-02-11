@@ -1,12 +1,15 @@
 @extends('admin.template')
 
 @section('page_name')
-    Vente
+    Ventes
 @endsection
 
+@section('css')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 
 @section('title')
-    Vente
+    Ventes
 @endsection
 
 @section('side_bare')
@@ -30,15 +33,15 @@
         @endif
 
         <h1 class="text-center"> Ajouter une vente </h1>
-        <form method="post" action="{{ route('add_product') }}">
+        <form method="post" action="{{ route('ajouter_vente') }}" enctype="multipart/form-data">
             @csrf
-            {{-- imei1	imei2	sn	info_product_img	nom_client	tlf_client	 --}}
+
 
             <div class="row">
                 <div class="form-group col-md-4">
                     <label for="product_id">Produit</label>
 
-                    <select id="product_id" name="product_id" class="form-control" required>
+                    <select id="product_id" name="product_id" class="form-control">
                         <option value="">
                             @foreach ($all_pro as $pro)
                         <option value="{{ $pro->id }}"> {{ $pro->product_name }} </option>
@@ -49,50 +52,65 @@
                         <span class="text-danger"> {{ $message }} </span>
                     @enderror
                 </div>
+
+
                 <div class="form-group col-md-4">
+
                     <label for="imei1"> imei1 </label>
-                    <input class="form-control" id="imei1" name="imei1" required>
+                    <input class="form-control" id="imei1" name="imei1" required maxlength="15"
+                        value="{{ old('imei1') }}">
                     @error('imei1')
                         <span class="text-danger"> {{ $message }} </span>
                     @enderror
                 </div>
 
-                @if ($pro->double_puce)
-                    <div class="form-group col-md-4">
-                        <label for="imei2"> imei2 </label>
-                        <input class="form-control" id="imei2" name="imei2" required>
-                        @error('imei2')
-                            <span class="text-danger"> {{ $message }} </span>
-                        @enderror
-                    </div>
-                @endif
+                <div class='form-group col-md-4' id="pro_info">
+
+                    <label for='imei2'> imei2 </label>
+                    <input class='form-control' id='imei2' name='imei2' required maxlength='15'  value="{{ old('imei2') }}">
+                    @error('imei2')
+                        <span class="text-danger"> {{ $message }} </span>
+                    @enderror
+
+                </div>
 
             </div>
 
 
             <div class="row">
                 <div class="form-group col-md-4">
+                    <label for="sn"> Serial number </label>
+                    <input type="text" class="form-control" id="sn" name="sn" required
+                        value="{{ old('sn') }}">
+                    @error('sn')
+                        <span class="text-danger"> {{ $message }} </span>
+                    @enderror
+                </div>
+
+                <div class="form-group col-md-3">
                     <label for="nom_client"> Nom client </label>
-                    <input type="text" class="form-control" id="nom_client" name="nom_client" required>
+                    <input type="text" class="form-control" id="nom_client" name="nom_client" required
+                        value="{{ old('nom_client') }}">
                     @error('nom_client')
                         <span class="text-danger"> {{ $message }} </span>
                     @enderror
                 </div>
-                <div class="form-group col-md-4">
+
+                <div class="form-group col-md-3">
                     <label for="tlf_client">Téléphone client </label>
-                    <input type="number" class="form-control" id="tlf_client" name="tlf_client" required   >
+                    <input type="number" class="form-control" id="tlf_client" name="tlf_client" required
+                        value="{{ old('tlf_client') }}">
                     @error('tlf_client')
                         <span class="text-danger"> {{ $message }} </span>
                     @enderror
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="double_puce">double puce</label>
-                    <select id="double_puce" class="form-control" name="double_puce" required>
-                        <option selected> </option>
-                        <option value="1"> oui </option>
-                        <option value="0"> non </option>
-                    </select>
-                    @error('double_puce')
+
+
+                <div class="form-group col-md-2">
+                    <label for="info_product_img"> Image </label>
+                    <input type="file" class="form-control" id="info_product_img" name="info_product_img" required
+                        accept="image/*" capture="camera">
+                    @error('info_product_img')
                         <span class="text-danger"> {{ $message }} </span>
                     @enderror
                 </div>
@@ -108,6 +126,54 @@
 @endsection
 
 @section('js')
+    {{-- <script>
+        $(document).ready(function() {
+            $('#product_id').change(function() {
+
+                $('#pro_info').html('Chargement..');
+                var productId = $(this).val();
+                if (productId) {
+                    var url = "{{ route('get_info_pro_ajax', ':id') }}".replace(':id', productId);
+
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: url,
+                        type: 'GET',
+                        dataType: 'json',
+
+                        success: function(response) {
+
+                            if (response.double_puce == 1) {
+                                $('#pro_info').html(` 
+                                <label for='imei2'> imei2 </label> 
+                                <input class='form-control' id='imei2' name='imei2' required maxlength='15' > 
+                                @error('imei2')
+                                    <span class="text-danger"> {{ $message }} </span>
+                                @enderror
+                                `);
+                            } else {
+                                $('#pro_info').html('');
+                            }
+
+
+                        },
+                        error: function(xhr) {
+                            console.log('err');
+
+                        }
+                    });
+                } else {
+                    // $('#productName, #productPrice, #productDescription').text(''); 
+                    $('#pro_info').text("");
+                }
+            });
+        });
+    </script> --}}
+
+    {{--   data table  --}}
+
     <script>
         $(document).ready(function() {
             $("#basic-datatables").DataTable({});

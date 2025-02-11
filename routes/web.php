@@ -42,6 +42,9 @@ Route::prefix("admin")->middleware([ "auth" , "VerifyIsAdmin" ])->group(function
     Route::post('/modifier-produit/{id}', [ProductController::class, 'modifier_produit'])->name('modifier_produit');
     Route::delete('/supp-produit/{id}', [ProductController::class, 'supp_produit'])->name('supp_produit');
     Route::post('/add_product', [ProductController::class, 'add_product'])->name('add_product');
+
+ 
+
     
 
     // users
@@ -75,6 +78,8 @@ Route::prefix("store")->middleware(["auth" , "VerifyIsPropStore"])->group(functi
 
     Route::get('/dashboard', [UserController::class, 'dashboard_store'])->name('dashboard_store');
     Route::get('/ajouter-vente', [SaleController::class, 'ajouter_vente_page'])->name('ajouter_vente_page');
+    Route::post('/ajouter-vente', [SaleController::class, 'ajouter_vente'])->name('ajouter_vente');
+    Route::get('/get_info_pro_ajax/{id}', [ProductController::class, 'get_info_pro_ajax'])->name('get_info_pro_ajax'); // ajax
  
 });
 

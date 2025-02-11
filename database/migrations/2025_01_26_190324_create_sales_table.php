@@ -10,6 +10,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
     public function up(): void
     {
         Schema::create('sales', function (Blueprint $table) {
@@ -17,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id')-> nullable();
             $table->unsignedBigInteger('seller_id')->nullable();
             $table->string('imei1')-> unique();
-            $table->string('imei2')-> unique();
+            $table->string('imei2')-> unique() -> nullable() ;
             $table->string('sn') ;
             $table->string('info_product_img');
             $table->string('nom_client'); 

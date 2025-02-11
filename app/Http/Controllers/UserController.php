@@ -61,8 +61,6 @@ class UserController extends StoreController
 
             } else {
 
-              
-
                 if ($count_admins > 1 ) {
 
                     $user->delete();
