@@ -52,7 +52,9 @@ class SaleController extends Controller
             // Ajouter la validation de imei2 si le produit est double puce
             if ($pro->double_puce) {
                 $rules['imei2'] = 'required|digits:15|unique:sales,imei2';
+                $imei2 =  $request->imei2;
             }
+
 
             $validated = $request->validate(
                 $rules,
@@ -79,6 +81,7 @@ class SaleController extends Controller
 
 
                 $seller_id = Auth_user::user()->id;
+
                 Sale::create([
 
                     'product_id' => $request->product_id,
@@ -104,17 +107,26 @@ class SaleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Sale $sale)
+    public function mes_ventes()
     {
-        //
+        $sales = Sale::join('products' , 'products.id' , 'sales.product_id' )
+         ->select('sales.*', 'products.product_name' )
+        ->where('sales.seller_id', '=', (Auth_user::user()->id))->paginate(15);;
+
+        return view("stores.mes_ventes_page", compact('sales'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Sale $sale)
+    public function modification(  $sale)
     {
-        //
+        $sale = Sale::find($sale);
+  
+        if ( $sale ) {
+            return view('stores.update_sales', compact('sale'));
+        }
+        return  redirect()-> back()-> with("error" , "erreur" ) ;
     }
 
     /**

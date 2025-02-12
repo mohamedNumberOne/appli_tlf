@@ -238,7 +238,7 @@
                                          </a>
                                      </li>
                                       <li>
-                                         <a href="{{ route('ajouter_vente_page') }}">
+                                         <a href="{{ route('mes_ventes') }}">
                                              <span class="sub-item">Mes ventes </span>
                                          </a>
                                      </li>

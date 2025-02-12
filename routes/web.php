@@ -36,6 +36,8 @@ Route::prefix("admin")->middleware([ "auth" , "VerifyIsAdmin" ])->group(function
     Route::get('/paiement-commerciaux', [PaymentComAdminController::class, 'paiement_commerciaux_page'])
         ->name('paiement_commerciaux');
 
+
+
         // produits
     Route::get('/ajouter-produit', [ProductController::class, 'ajouter_produit_page'])->name('ajouter_produit');
     Route::get('/modifier-produit/{id}', [ProductController::class, 'modifier_produit_page'])->name('modifier_produit_page');
@@ -43,9 +45,8 @@ Route::prefix("admin")->middleware([ "auth" , "VerifyIsAdmin" ])->group(function
     Route::delete('/supp-produit/{id}', [ProductController::class, 'supp_produit'])->name('supp_produit');
     Route::post('/add_product', [ProductController::class, 'add_product'])->name('add_product');
 
- 
 
-    
+
 
     // users
     Route::post('/create_user', [UserController::class, 'create_user'])->name('create_user');
@@ -80,6 +81,8 @@ Route::prefix("store")->middleware(["auth" , "VerifyIsPropStore"])->group(functi
     Route::get('/ajouter-vente', [SaleController::class, 'ajouter_vente_page'])->name('ajouter_vente_page');
     Route::post('/ajouter-vente', [SaleController::class, 'ajouter_vente'])->name('ajouter_vente');
     Route::get('/get_info_pro_ajax/{id}', [ProductController::class, 'get_info_pro_ajax'])->name('get_info_pro_ajax'); // ajax
+    Route::get('/mes-ventes', [SaleController::class, 'mes_ventes'])->name('mes_ventes');
+    Route::get('/modification-vente/{id}', [SaleController::class, 'modification'])->name('modification');  
  
 });
 

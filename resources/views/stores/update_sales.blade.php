@@ -1,7 +1,7 @@
 @extends('admin.template')
 
 @section('page_name')
-    Ventes
+    modifications
 @endsection
 
 @section('css')
@@ -9,7 +9,7 @@
 @endsection
 
 @section('title')
-    Ventes
+    modifications
 @endsection
 
 @section('side_bare')
@@ -33,15 +33,15 @@
             </div>
         @endif
 
-        <h1 class="text-center"> Ajouter une vente </h1>
+        <h1 class="text-center"> modification  <img src="{{ asset('assets/' . $sale->info_product_img) }}" alt="img"  width="200px" > </h1>
         <form method="post" action="{{ route('ajouter_vente') }}" enctype="multipart/form-data">
-            @csrf
 
+            @csrf
 
             <div class="row">
                 <div class="form-group col-md-4">
                     <label for="product_id">Produit</label>
-
+                    {{-- 
                     <select id="product_id" name="product_id" class="form-control">
                         <option value="">
                             @foreach ($all_pro as $pro)
@@ -50,7 +50,7 @@
                             {{ $pro->product_name }}
                         </option>
                         @endforeach
-                    </select>
+                    </select> --}}
 
                     @error('product_id')
                         <span class="text-danger"> {{ $message }} </span>
@@ -62,7 +62,7 @@
 
                     <label for="imei1"> imei1 </label>
                     <input class="form-control" id="imei1" name="imei1" required maxlength="15"
-                        value="{{ old('imei1') }}">
+                        value="{{ $sale->imei1 }}">
                     @error('imei1')
                         <span class="text-danger"> {{ $message }} </span>
                     @enderror
@@ -71,7 +71,7 @@
                 <div class='form-group col-md-4' id="pro_info">
 
                     <label for='imei2'> imei2 </label>
-                    <input class='form-control' id='imei2' name='imei2' maxlength='15' value="{{ old('imei2') }}">
+                    <input class='form-control' id='imei2' name='imei2' maxlength='15' value="{{ $sale->imei2 }}">
                     @error('imei2')
                         <span class="text-danger"> {{ $message }} </span>
                     @enderror
@@ -85,7 +85,7 @@
                 <div class="form-group col-md-4">
                     <label for="sn"> Serial number </label>
                     <input type="text" class="form-control" id="sn" name="sn" required
-                        value="{{ old('sn') }}">
+                        value="{{ $sale->sn }}">
                     @error('sn')
                         <span class="text-danger"> {{ $message }} </span>
                     @enderror
@@ -94,7 +94,7 @@
                 <div class="form-group col-md-3">
                     <label for="nom_client"> Nom client </label>
                     <input type="text" class="form-control" id="nom_client" name="nom_client" required
-                        value="{{ old('nom_client') }}">
+                        value="{{ $sale->nom_client }}">
                     @error('nom_client')
                         <span class="text-danger"> {{ $message }} </span>
                     @enderror
@@ -103,7 +103,7 @@
                 <div class="form-group col-md-3">
                     <label for="tlf_client">Téléphone client </label>
                     <input type="number" class="form-control" id="tlf_client" name="tlf_client" required
-                        value="{{ old('tlf_client') }}">
+                        value="{{ $sale->tlf_client }}">
                     @error('tlf_client')
                         <span class="text-danger"> {{ $message }} </span>
                     @enderror
@@ -111,16 +111,19 @@
 
 
                 <div class="form-group col-md-2">
+
                     <label for="info_product_img"> Image </label>
                     <input type="file" class="form-control" id="info_product_img" name="info_product_img" required
-                        accept="image/*"   >
-                        {{-- capture="camera" --}}
+                        accept="image/*">
+
                     @error('info_product_img')
                         <span class="text-danger"> {{ $message }} </span>
                     @enderror
                 </div>
 
+                
             </div>
+                
 
             <button type="submit" class="btn btn-primary w-100 mt-2 mb-3"> Ajouter </button>
         </form>
@@ -141,7 +144,7 @@
         if (!(selectedOption.value != "" && selectedOption.getAttribute('data-dp') == "true")) {
             imei2.value = "";
             imei2.disabled = 1;
-        }  
+        }
 
         $(document).ready(function() {
             $('#product_id').change(function() {
