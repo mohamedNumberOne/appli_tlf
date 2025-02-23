@@ -11,7 +11,7 @@ class StoreReturn_pRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return 1;
     }
 
     /**
@@ -22,7 +22,7 @@ class StoreReturn_pRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'sale_id' => "required,exist:sales,id",
         ];
     }
 }

@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('return_ps', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("sale_id")-> nullable() ;
+            $table->unsignedBigInteger("sale_id")-> nullable();
+            $table->string("problem")  ;
 
             $table->foreign("sale_id")->references('id')->on('sales')->onDelete('SET NULL');
 

@@ -13,6 +13,7 @@ class Return_p extends Model
     protected  $fillable  = [
 
         "sale_id",
- 
+        "problem",
+
     ];
 }

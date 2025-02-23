@@ -33,24 +33,29 @@
             </div>
         @endif
 
-        <h1 class="text-center"> modification  <img src="{{ asset('assets/' . $sale->info_product_img) }}" alt="img"  width="200px" > </h1>
-        <form method="post" action="{{ route('ajouter_vente') }}" enctype="multipart/form-data">
+        <h1 class="text-center"> modification  
+            <img src="{{ asset('assets/' . $sale->info_product_img) }}" alt="img"  width="200px" > 
+        </h1>
+
+        <form method="post" action="{{ route('modification_vente' , $sale-> id ) }}" enctype="multipart/form-data">
 
             @csrf
 
             <div class="row">
                 <div class="form-group col-md-4">
                     <label for="product_id">Produit</label>
-                    {{-- 
+                    
                     <select id="product_id" name="product_id" class="form-control">
                         <option value="">
+                           
                             @foreach ($all_pro as $pro)
-                        <option value="{{ $pro->id }}" {{ old('product_id') == $pro->id ? 'selected' : '' }}
+                        <option value="{{ $pro->id }}" {{( $sale->product_id == $pro->id )? 'selected' : '' }}
                             {{ $pro->double_puce == 1 ? 'data-dp=true' : '' }}>
                             {{ $pro->product_name }}
                         </option>
                         @endforeach
-                    </select> --}}
+                    </select> 
+                   
 
                     @error('product_id')
                         <span class="text-danger"> {{ $message }} </span>
@@ -113,7 +118,7 @@
                 <div class="form-group col-md-2">
 
                     <label for="info_product_img"> Image </label>
-                    <input type="file" class="form-control" id="info_product_img" name="info_product_img" required
+                    <input type="file" class="form-control" id="info_product_img" name="info_product_img"  
                         accept="image/*">
 
                     @error('info_product_img')
@@ -125,7 +130,7 @@
             </div>
                 
 
-            <button type="submit" class="btn btn-primary w-100 mt-2 mb-3"> Ajouter </button>
+            <button type="submit" class="btn btn-primary w-100 mt-2 mb-3"> Modifier </button>
         </form>
 
 
@@ -134,6 +139,7 @@
 @endsection
 
 @section('js')
+
     <script>
         var productId = document.getElementById('product_id');
 

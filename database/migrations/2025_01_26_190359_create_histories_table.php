@@ -17,8 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger("sale_id")->nullable();
             $table->unsignedBigInteger('product_id')->nullable();
 
-            $table->string('imei1')->unique();
-            $table->string('imei2')->unique();
+            $table->string('imei1') ;
+            $table->string('imei2') ;
             $table->string('sn');
             $table->string('info_product_img');
             $table->string('nom_client');

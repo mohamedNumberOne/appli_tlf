@@ -83,10 +83,49 @@
                                     <td> {{ $sale->created_at }} </td>
 
                                     <td>
-                                        <a class="btn  btn-primary  p-2"
-                                            href="{{ route('modification', $sale->id) }}">
+
+                                        <a class="btn  btn-primary  p-2" href="{{ route('modification', $sale->id) }}">
                                             <i class="fas fa-pen-square"></i>
                                         </a>
+
+
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-danger p-2" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal{{ $sale->id }}">
+                                            <i class="fas fa-undo-alt"></i>
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal{{ $sale->id }}" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">  
+                                                            Ajouter un Retour ?
+                                                        </h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <form action="{{route('add_retour')}}" method="post" >
+                                                        @csrf
+                                                        <div class="modal-body">
+                                                            <input class="form-control" type="text" name="problem" placeholder="Probléme" >
+                                                            <input class="form-control" type="hidden" name="sale_id"  value="{{ $sale->id  }}"  >
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Annuler</button>
+                                                            <button type="submit" class="btn btn-danger">
+                                                               Confirmer
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
                                     </td>
                                 </tr>
                             @endforeach

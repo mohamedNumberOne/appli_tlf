@@ -7,6 +7,8 @@ use App\Http\Controllers\PaymentComAdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\ReturnPController;
+
 
 
 use Illuminate\Support\Facades\Route;
@@ -34,11 +36,11 @@ Route::prefix("admin")->middleware([ "auth" , "VerifyIsAdmin" ])->group(function
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     Route::get('/paiement-store', [PaymentStoreComController::class, 'paiement_store_page'])->name('paiement_store');
     Route::get('/paiement-commerciaux', [PaymentComAdminController::class, 'paiement_commerciaux_page'])
-        ->name('paiement_commerciaux');
+    ->name('paiement_commerciaux');
 
 
 
-        // produits
+    // produits
     Route::get('/ajouter-produit', [ProductController::class, 'ajouter_produit_page'])->name('ajouter_produit');
     Route::get('/modifier-produit/{id}', [ProductController::class, 'modifier_produit_page'])->name('modifier_produit_page');
     Route::post('/modifier-produit/{id}', [ProductController::class, 'modifier_produit'])->name('modifier_produit');
@@ -56,7 +58,6 @@ Route::prefix("admin")->middleware([ "auth" , "VerifyIsAdmin" ])->group(function
     Route::post('/update_commercial/{id}', [UserController::class, 'update_commercial'])->name('update_commercial');
     Route::delete('/delete_user/{id}', [UserController::class, 'delete_user'])->name('delete_user');
 
-    
 
     Route::get('/store-liste', [StoreController::class, 'liste_store'])->name('liste_store');
     
@@ -82,7 +83,9 @@ Route::prefix("store")->middleware(["auth" , "VerifyIsPropStore"])->group(functi
     Route::post('/ajouter-vente', [SaleController::class, 'ajouter_vente'])->name('ajouter_vente');
     Route::get('/get_info_pro_ajax/{id}', [ProductController::class, 'get_info_pro_ajax'])->name('get_info_pro_ajax'); // ajax
     Route::get('/mes-ventes', [SaleController::class, 'mes_ventes'])->name('mes_ventes');
-    Route::get('/modification-vente/{id}', [SaleController::class, 'modification'])->name('modification');  
+    Route::get('/modification-vente/{id}', [SaleController::class, 'modification'])->name('modification');
+    Route::post('/modification-vente/{id}', [SaleController::class, 'modification_vente'])->name('modification_vente');
+    Route::post('/add_retour', [ReturnPController::class, 'add_retour'])->name('add_retour');  
  
 });
 

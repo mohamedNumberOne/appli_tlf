@@ -5,15 +5,30 @@ namespace App\Http\Controllers;
 use App\Models\Return_p;
 use App\Http\Requests\StoreReturn_pRequest;
 use App\Http\Requests\UpdateReturn_pRequest;
+use App\Models\Sale;
 
 class ReturnPController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function add_retour(StoreReturn_pRequest $request)
     {
-        //
+
+        $sale_id = $request->sale_id;
+
+        $sale =  Sale::find($sale_id);
+        if ($sale) {
+            Return_p::create([
+
+                "problem" => $request->problem,
+                "sale_id" => $sale_id
+            ]);
+
+            return redirect()->back()->with("success", "Retour Ajouté!");
+        } else {
+            return redirect()->back()->with("error", "Erreur1!");
+        }
     }
 
     /**
