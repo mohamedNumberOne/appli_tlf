@@ -72,9 +72,10 @@
                             <div class="numbers">
                                 <p class="card-category">Solde à remettre</p>
                                 <h4 class="card-title">
-                                    @foreach ($info_store as $info)
+                                    {{-- @foreach ($info_store as $info)
                                         {{ $info->total_to_pay }}
-                                    @endforeach Da
+                                    @endforeach Da --}}
+                                    {{ Auth::user() -> solde }} Da
                                 </h4>
                             </div>
                         </div>

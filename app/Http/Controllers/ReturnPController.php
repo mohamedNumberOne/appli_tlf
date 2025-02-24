@@ -6,6 +6,8 @@ use App\Models\Return_p;
 use App\Http\Requests\StoreReturn_pRequest;
 use App\Http\Requests\UpdateReturn_pRequest;
 use App\Models\Sale;
+use Illuminate\Support\Facades\Auth;
+
 
 class ReturnPController extends Controller
 {
@@ -16,27 +18,52 @@ class ReturnPController extends Controller
     {
 
         $sale_id = $request->sale_id;
-
         $sale =  Sale::find($sale_id);
+
         if ($sale) {
-            Return_p::create([
 
-                "problem" => $request->problem,
-                "sale_id" => $sale_id
-            ]);
+            // mazal lazm nzid nhws ida ssale yxisti f table retour wla nn  _____
 
-            return redirect()->back()->with("success", "Retour Ajouté!");
+
+                Return_p::create([
+
+                    "problem" => $request->problem,
+                    "sale_id" => $sale_id
+
+                ]);
+
+                return redirect()->back()->with("success", "Retour Ajouté!");
+            
+
+    
         } else {
-            return redirect()->back()->with("error", "Erreur1!");
+            return redirect()->back()->with("error", "Cette vente n'existe  plus!");
         }
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function page_retours()
     {
-        //
+
+        $retours =  Return_p::leftJoin('sales', "return_ps.sale_id", "sales.id")
+            ->leftJoin('products', "products.id", "sales.product_id")
+            ->select(
+                'return_ps.*',
+                "products.product_name",
+                "sales.imei1",
+                "sales.imei2",
+                "sales.info_product_img",
+                "sales.nom_client",
+                "sales.tlf_client",
+                "sales.sn",
+                "return_ps.created_at as date_retour"
+            )
+            ->where('sales.seller_id', '=',  Auth::user()->id)
+            ->get();
+
+        return view("stores.page_retour", compact("retours"));
     }
 
     /**

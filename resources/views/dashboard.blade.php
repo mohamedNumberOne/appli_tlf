@@ -2,11 +2,11 @@
 
 
 @section('page_name')
-    dashboard
+    Dashboard
 @endsection
 
 @section('title')
-    dashboard
+    Dashboard
 @endsection
 
 @section('side_bare')

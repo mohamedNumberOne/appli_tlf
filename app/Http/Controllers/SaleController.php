@@ -7,6 +7,7 @@ use App\Models\History;
 use App\Models\Product;
 use App\Http\Requests\StoreSaleRequest;
 use App\Http\Requests\UpdateSaleRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Auth as Auth_user;
@@ -103,12 +104,19 @@ class SaleController extends Controller
                     'imei1' => $request->imei1,
                     'imei2' => $imei2,
                     'sale_id' => $sale_id->  id ,
-                    
                     'sn' => $request->sn,
                     'info_product_img' => $info_product_img,
                     'nom_client' => $request->nom_client,
                     'tlf_client' => $request->tlf_client,
                 ]);
+
+                $user =  User::find(  (Auth_user::user()-> id) ) ;
+
+                $new_solde  =  ( $pro -> prix_garantie ) +   (    $user  -> solde );
+
+                $user -> update([
+                    "solde" => $new_solde 
+                ]) ;
 
                 return redirect()->back()->with('success', 'produit vendu avec succés');
             } else {
@@ -125,7 +133,7 @@ class SaleController extends Controller
     public function mes_ventes()
     {
         $sales = Sale::join('products', 'products.id', 'sales.product_id')
-            ->select('sales.*', 'products.product_name')
+            ->select('sales.*', 'products.product_name' , 'products.prix_garantie' )
             ->where('sales.seller_id', '=', (Auth_user::user()->id))->paginate(15);;
 
         return view("stores.mes_ventes_page", compact('sales'));

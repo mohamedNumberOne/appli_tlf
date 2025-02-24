@@ -22,7 +22,7 @@ class StoreReturn_pRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'sale_id' => "required,exist:sales,id",
+            'sale_id' => "required|exists:sales,id",
         ];
     }
 }

@@ -1,11 +1,11 @@
 @extends('admin.template')
 
 @section('page_name')
-    Mes Ventes
+    Retours
 @endsection
 
 @section('title')
-    Mes Ventes
+   Retours
 @endsection
 
 @section('side_bare')
@@ -28,9 +28,9 @@
             </div>
         @endif
 
-        <h1 class="text-center"> Mes ventes </h1>
+        <h1 class="text-center"> Mes Retours </h1>
 
-        @if (count($sales) > 0)
+        @if (count($retours) > 0)
             <div class="card-body">
                 <div class="table-responsive">
                     <table id="basic-datatables" class="display table table-striped table-hover">
@@ -44,9 +44,9 @@
                                 <th>photo </th>
                                 <th>client </th>
                                 <th> N° </th>
+                                <th> Probléme </th>
                                 <th style="min-width: 80px"> Date </th>
-                                <th>action </th>
-
+                            
                             </tr>
                         </thead>
                         <tfoot>
@@ -59,79 +59,34 @@
                                 <th>photo </th>
                                 <th>client </th>
                                 <th> N° </th>
+                                <th> Probléme </th>
                                 <th>date </th>
-                                <th>action </th>
+                            
                             </tr>
                         </tfoot>
                         <tbody>
 
-                            @foreach ($sales as $sale)
+                            @foreach ($retours as $retour)
                                 <tr>
-                                    <td> {{ $sale->id }} </td>
-                                    <td> {{ $sale->product_name }} </td>
-                                    <td> {{ $sale->imei1 }} </td>
+                                    <td> {{ $retour->id }} </td>
+                                    <td> {{ $retour->product_name }} </td>
+                                    <td> {{ $retour->imei1 }} </td>
                                     <td>
-                                        @if (empty($sale->imei2))
+                                        @if (empty($retour->imei2))
                                             /
                                         @else
-                                            {{ $sale->imei2 }}
+                                            {{ $retour->imei2 }}
                                         @endif
                                     </td>
-                                    <td>    {{ $sale->sn }}</td>
-                                    <td> <img src="{{ asset('assets/' . $sale->info_product_img) }}" alt="image"
-                                            width="80px">  
-                                            <hr>
-                                            <span class="badge bg-primary" >   {{ $sale-> prix_garantie }} da </span>
-                                    </td>
-                                    <td> {{ $sale->nom_client }} </td>
-                                    <td> {{ $sale->tlf_client }} </td>
-                                    <td> {{ $sale->created_at }} </td>
+                                    <td>   {{ $retour->sn }} </td>
+                                    <td> <img src="{{ asset('assets/' . $retour->info_product_img) }}" alt="image"
+                                            width="80px"> </td>
+                                    <td> {{ $retour->nom_client }} </td>
+                                    <td> {{ $retour->tlf_client }} </td>
+                                    <td> {{ $retour->problem }} </td>
+                                    <td> {{ $retour->date_retour }} </td>
 
-                                    <td>
-
-                                        <a class="btn  btn-primary  p-2" href="{{ route('modification', $sale->id) }}">
-                                            <i class="fas fa-pen-square"></i>
-                                        </a>
-
-
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-danger p-2" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal{{ $sale->id }}">
-                                            <i class="fas fa-undo-alt"></i>
-                                        </button>
-
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exampleModal{{ $sale->id }}" tabindex="-1"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">  
-                                                            Ajouter un Retour ?
-                                                        </h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <form action="{{route('add_retour')}}" method="post" >
-                                                        @csrf
-                                                        <div class="modal-body">
-                                                            <input class="form-control" type="text" name="problem" placeholder="Probléme" >
-                                                            <input class="form-control" type="hidden" name="sale_id"  value="{{ $sale->id  }}"  >
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Annuler</button>
-                                                            <button type="submit" class="btn btn-danger">
-                                                               Confirmer
-                                                            </button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </td>
+                                   
                                 </tr>
                             @endforeach
                         </tbody>
@@ -139,7 +94,7 @@
                 </div>
             </div>
         @else
-            <div class="alert alert-warning bg-warning text-center text-white"> pas de ventes </div>
+            <div class="alert alert-warning bg-warning text-center text-white"> pas de Retours </div>
         @endif
     </div>
 @endsection

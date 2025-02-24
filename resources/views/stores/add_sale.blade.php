@@ -47,7 +47,7 @@
                             @foreach ($all_pro as $pro)
                         <option value="{{ $pro->id }}" {{ old('product_id') == $pro->id ? 'selected' : '' }}
                             {{ $pro->double_puce == 1 ? 'data-dp=true' : '' }}>
-                            {{ $pro->product_name }}
+                            {{ $pro->product_name }}    /  ({{ $pro-> prix_garantie }} Da)
                         </option>
                         @endforeach
                     </select>

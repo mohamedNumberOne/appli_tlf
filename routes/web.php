@@ -85,8 +85,11 @@ Route::prefix("store")->middleware(["auth" , "VerifyIsPropStore"])->group(functi
     Route::get('/mes-ventes', [SaleController::class, 'mes_ventes'])->name('mes_ventes');
     Route::get('/modification-vente/{id}', [SaleController::class, 'modification'])->name('modification');
     Route::post('/modification-vente/{id}', [SaleController::class, 'modification_vente'])->name('modification_vente');
-    Route::post('/add_retour', [ReturnPController::class, 'add_retour'])->name('add_retour');  
- 
+    Route::post('/add_retour', [ReturnPController::class, 'add_retour'])->name('add_retour');
+    Route::get('/mes-retours', [ReturnPController::class, 'page_retours'])->name('page_retours');  
+    
+    
+
 });
 
 
