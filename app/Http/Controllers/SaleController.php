@@ -86,7 +86,7 @@ class SaleController extends Controller
 
                 $seller_id = Auth_user::user()->id;
 
-              $sale_id =   Sale::create([
+                $sale_id =   Sale::create([
 
                     'product_id' => $request->product_id,
                     'seller_id' =>   $seller_id,
@@ -103,20 +103,20 @@ class SaleController extends Controller
                     'product_id' => $request->product_id,
                     'imei1' => $request->imei1,
                     'imei2' => $imei2,
-                    'sale_id' => $sale_id->  id ,
+                    'sale_id' => $sale_id->id,
                     'sn' => $request->sn,
                     'info_product_img' => $info_product_img,
                     'nom_client' => $request->nom_client,
                     'tlf_client' => $request->tlf_client,
                 ]);
 
-                $user =  User::find(  (Auth_user::user()-> id) ) ;
 
-                $new_solde  =  ( $pro -> prix_garantie ) +   (    $user  -> solde );
+                $user =  User::find((Auth_user::user()->id));
+                $new_solde  =  ($pro->prix_garantie) +   ($user->solde);
 
-                $user -> update([
-                    "solde" => $new_solde 
-                ]) ;
+                $user->update([
+                    "solde" => $new_solde
+                ]);
 
                 return redirect()->back()->with('success', 'produit vendu avec succés');
             } else {
@@ -133,8 +133,10 @@ class SaleController extends Controller
     public function mes_ventes()
     {
         $sales = Sale::join('products', 'products.id', 'sales.product_id')
-            ->select('sales.*', 'products.product_name' , 'products.prix_garantie' )
-            ->where('sales.seller_id', '=', (Auth_user::user()->id))->paginate(15);;
+            ->select('sales.*', 'products.product_name', 'products.prix_garantie')
+            ->where('sales.seller_id', '=', (Auth_user::user()->id))
+            ->orderBy('sales.created_at', "DESC")
+            ->paginate(10);
 
         return view("stores.mes_ventes_page", compact('sales'));
     }
@@ -148,8 +150,8 @@ class SaleController extends Controller
         $sale = Sale::find($sale);
 
 
-        if (! $sale   ) {
-            return  redirect()-> route('dashboard_store') ->with("error", "erreur");
+        if (! $sale) {
+            return  redirect()->route('dashboard_store')->with("error", "erreur");
         } else {
             $all_pro = Product::all();
 
@@ -160,10 +162,6 @@ class SaleController extends Controller
 
             return view('stores.update_sales', compact('sale', "all_pro"));
         }
-
-
-
-
     }
 
     /**
@@ -220,7 +218,7 @@ class SaleController extends Controller
                     $file = $request->file('info_product_img');
                     $info_product_img = $file->store('img_sale_phones', 'public');
                 } else {
-                    $info_product_img  =   $sale->info_product_img ;
+                    $info_product_img  =   $sale->info_product_img;
                 }
 
                 //  la 1ere image troh l history , w la nouvelle   troh l sale 
@@ -243,7 +241,7 @@ class SaleController extends Controller
                     'imei1' => $request->imei1,
                     'imei2' => $imei2,
                     'sn' => $request->sn,
-                    'sale_id' => $sale-> id ,
+                    'sale_id' => $sale->id,
                     'info_product_img' => $info_product_img,
                     'nom_client' => $request->nom_client,
                     'tlf_client' => $request->tlf_client,

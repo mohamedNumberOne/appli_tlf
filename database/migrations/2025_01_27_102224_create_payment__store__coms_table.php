@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('commercial_id')->nullable();
             $table->boolean('seller_engagement')->default(0);
             $table->boolean('commercial_engagement')->default(0);
-            $table->string('photo_money');
+            $table->string('photo_money')->nullable();  
             $table->unsignedSmallInteger('montant');
             $table->boolean('payment_done')->default(0);  
 

@@ -11,7 +11,7 @@ class StorePayment_Store_ComRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return 1;
     }
 
     /**

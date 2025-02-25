@@ -265,6 +265,25 @@
                          </li>
 
 
+                         <li class="nav-item">
+                             <a data-bs-toggle="collapse" href="#paimnt_str">
+                                 <i class="fas fa-dollar-sign" ></i>
+                                 <p> Paiements </p>
+                                 <span class="caret"></span>
+                             </a>
+                             <div class="collapse" id="paimnt_str">
+                                 <ul class="nav nav-collapse">
+                                     <li>
+                                         <a href="{{ route('ajouter_paiement_page') }}">
+                                             <span class="sub-item">Ajouter un Paiement</span>
+                                         </a>
+                                     </li>
+                                     
+                                 </ul>
+                             </div>
+                         </li>
+
+
                      </ul>
                  </div>
              </div>

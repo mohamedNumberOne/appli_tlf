@@ -9,7 +9,7 @@ use App\Http\Controllers\StoreController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ReturnPController;
 
-
+ 
 
 use Illuminate\Support\Facades\Route;
 
@@ -86,8 +86,10 @@ Route::prefix("store")->middleware(["auth" , "VerifyIsPropStore"])->group(functi
     Route::get('/modification-vente/{id}', [SaleController::class, 'modification'])->name('modification');
     Route::post('/modification-vente/{id}', [SaleController::class, 'modification_vente'])->name('modification_vente');
     Route::post('/add_retour', [ReturnPController::class, 'add_retour'])->name('add_retour');
-    Route::get('/mes-retours', [ReturnPController::class, 'page_retours'])->name('page_retours');  
-    
+    Route::get('/mes-retours', [ReturnPController::class, 'page_retours'])->name('page_retours');
+    Route::get('/ajouter-paiement', [PaymentStoreComController::class, 'ajouter_paiement_page'])->name('ajouter_paiement_page');
+    Route::post('/add_p_stoer_com', [PaymentStoreComController::class, 'add_p_stoer_com'])->name('add_p_stoer_com');
+
     
 
 });
