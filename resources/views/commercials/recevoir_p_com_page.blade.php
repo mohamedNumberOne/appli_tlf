@@ -28,27 +28,9 @@
             </div>
         @endif
 
-        <h1 class="text-center mb-5"> Ajouter un Paiement </h1>
-
-        @if ($solde > 0)
-        <h5>Mon solde : <b> {{ $solde }} Da </b></h5>
-            <form action="{{ route('add_p_stoer_com') }}" method="POST">
-                @csrf
-                <div class=" row">
-                    <div class="col-md-8">
-                        <input type="number" class="form-control" name="montant" required placeholder="Montant (Da)"
-                            min="1000" max="50000">
-                    </div>
-                </div>
-                <input type="submit" class="btn btn-primary mt-4" value="Payer">
-
-            </form>
-        @else
-            <div class="alert alert-warning bg-warning text-white text-center">
-                Vous ne pouvez pas faire un paiement pour l'instant
-            </div>
-        @endif
-
+        
+        <h5 class="mb-2" >Mon solde : <b> {{ $solde }} Da </b></h5>
+          
 
         <hr>
 
@@ -99,18 +81,27 @@
                                         @if ($engagement->commercial_engagement)
                                             <i class="fas fa-check-square"></i>
                                         @else
-                                            <i class="fas fa-times"></i>
+                                          <form action="" method="POST" >
+                                            @csrf
+                                        
+                                            <input class="btn btn-primary p-1  mt-1" type="submit" value="Valider">
+                                           </form>
+                                            
                                         @endif
                                     </td>
                                     <td> {{ $engagement->created_at }}</td>
 
-                                    <td>
+                                    <td style="max-width: 200px" >
 
                                         @if ($engagement->photo_money)
                                             <img src="{{ asset('assets/' . $engagement->photo_money) }}" alt="image"
                                                 width="80px">
                                         @else
-                                            <i class="fas fa-times"></i>
+                                           <form action="" method="POST" enctype="multipart/form-data" >
+                                            @csrf
+                                            <input class="form-control" type="file" name="photo_money"  >
+                                            <input class="btn btn-primary p-1  mt-1" type="submit" value="ajouter">
+                                           </form>
                                         @endif
 
                                     </td>

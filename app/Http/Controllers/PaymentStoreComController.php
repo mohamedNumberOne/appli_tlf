@@ -39,9 +39,7 @@ class PaymentStoreComController extends Controller
         $id_user_store = Auth::user() -> id;
         $commercial =  Store::where("id_prop" ,'=', $id_user_store  ) ->first() ; 
         $id_commercial =  $commercial ->id_added_by_com ;
-
-
-        // id	seller_id	commercial_id	seller_engagement	commercial_engagement	photo_money	montant	payment_done	 
+ 
 
         Payment_Store_Com::create([
             "seller_id"	 =>  $id_user_store ,
@@ -62,9 +60,13 @@ class PaymentStoreComController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Payment_Store_Com $payment_Store_Com)
+    public function recevoir_p_com_page(Payment_Store_Com $payment_Store_Com)
     {
-        //
+        // njib asmawat les store +  le prop 
+        $solde = Auth::user()->solde;
+        $id_com = Auth::user()->id;
+        $mes_engagements =  Payment_Store_Com::where('commercial_id' , '=' ,   $id_com  )-> paginate(10) ;
+        return view('commercials.recevoir_p_com_page' , compact("solde" , "mes_engagements" ) );
     }
 
     /**

@@ -22,8 +22,6 @@ class ReturnPController extends Controller
 
         if ($sale) {
 
-            // mazal lazm nzid nhws ida ssale yxisti f table retour wla nn  _____
-
 
                 Return_p::create([
 
