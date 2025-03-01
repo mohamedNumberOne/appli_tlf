@@ -5,9 +5,8 @@
              <div class="sidebar-logo">
                  <!-- Logo Header -->
                  <div class="logo-header" data-background-color="dark">
-                     <a href="index.html" class="logo">
-                         <img src="{{ asset('assets/img/kaiadmin/logo_light.svg') }}" alt="navbar brand" class="navbar-brand"
-                             height="20" />
+                     <a href="{{ route('dashboard') }}" class="logo" style=" width:  100px   ;  margin:auto; margin-top:10px">
+                         <img src="{{ asset('logo.png') }}" alt="navbar brand " style="width: 100%;" class="navbar-brand" />
                      </a>
                      <div class="nav-toggle">
                          <button class="btn btn-toggle toggle-sidebar">
@@ -118,6 +117,10 @@
                  <!-- Logo Header -->
                  <div class="logo-header" data-background-color="dark">
 
+                     <a href="{{ route('dashboard') }}" class="logo" style=" width: 100px  ;  margin:auto; margin-top:10px">
+                         <img src="{{ asset('logo.png') }}" alt="navbar brand " style="width: 100%;" class="navbar-brand" />
+                     </a>
+
                      <div class="nav-toggle">
                          <button class="btn btn-toggle toggle-sidebar">
                              <i class="gg-menu-right"></i>
@@ -207,6 +210,12 @@
              <div class="sidebar-logo">
                  <!-- Logo Header -->
                  <div class="logo-header" data-background-color="dark">
+
+                     <a href="{{ route('dashboard') }}" class="logo" style=" width: 100px  ;  margin:auto; margin-top:10px">
+                         <img src="{{ asset('logo.png') }}" alt="navbar brand " style="width: 100%;"
+                             class="navbar-brand" />
+                     </a>
+
 
                      <div class="nav-toggle">
                          <button class="btn btn-toggle toggle-sidebar">
