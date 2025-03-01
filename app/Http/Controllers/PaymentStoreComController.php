@@ -39,7 +39,7 @@ class PaymentStoreComController extends Controller
 
         $id_user_store = Auth::user()->id;
         $solde_store = Auth::user()->  solde  ;
-      
+
         $commercial =  Store::where("id_prop", '=', $id_user_store)->first();
         $id_commercial =  $commercial->id_added_by_com;
 
@@ -56,8 +56,7 @@ class PaymentStoreComController extends Controller
                 "payment_done" =>  0,
             ]);
 
-
-            return redirect()->back()->with('success', "Engagement démmaré! En attente de validation ...");
+            return redirect()->back()->with('success', "Engagement démmaré ! En attente de validation ...");
 
         } else {
             return redirect()->back()->with('error', "le montant doit être 1000Da ou plus! et  ne doit pas dépasser votre solde");
@@ -124,13 +123,16 @@ class PaymentStoreComController extends Controller
                 {
 
                     return redirect()->back()->with("success", "Paiement accompli");
+
                 } else {
                     return redirect()->back()->with("error", "   Erreur 1  !");
                 }
 
+            } else {
+                return redirect()->back()->with("error", "   Erreur 2 !");
             }
         } else {
-            return redirect()->back()->with("error", " Erreur 2    !");
+            return redirect()->back()->with("error", "  Ajouter une photo valide    !");
         }
     }
 

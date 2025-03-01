@@ -22,6 +22,7 @@ class ReturnPController extends Controller
 
         if ($sale) {
 
+            // verifier ida yakder ydir  retour ( nb jour garantie ida khlas wla  mazl )
 
                 Return_p::create([
 
@@ -31,7 +32,7 @@ class ReturnPController extends Controller
                 ]);
 
                 return redirect()->back()->with("success", "Retour Ajouté!");
-            
+
 
     
         } else {
@@ -44,6 +45,9 @@ class ReturnPController extends Controller
      */
     public function page_retours()
     {
+
+
+        // verifier ida yakder ydir  retour ( nb jour garantie ida khlas wla  mazl )
 
         $retours =  Return_p::leftJoin('sales', "return_ps.sale_id", "sales.id")
             ->leftJoin('products', "products.id", "sales.product_id")
