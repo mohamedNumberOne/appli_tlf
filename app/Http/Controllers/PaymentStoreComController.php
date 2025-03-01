@@ -36,11 +36,14 @@ class PaymentStoreComController extends Controller
     public function add_p_stoer_com(StorePayment_Store_ComRequest $request)
     {
 
+
         $id_user_store = Auth::user()->id;
+        $solde_store = Auth::user()->  solde  ;
+      
         $commercial =  Store::where("id_prop", '=', $id_user_store)->first();
         $id_commercial =  $commercial->id_added_by_com;
 
-        if ( ($request->montant) >= 1000 ) {
+        if ( ($request->montant) >= 1000 && ( $request ->montant ) <=  $solde_store  ) {
 
 
             Payment_Store_Com::create([
@@ -56,11 +59,9 @@ class PaymentStoreComController extends Controller
 
             return redirect()->back()->with('success', "Engagement démmaré! En attente de validation ...");
 
-        }else {
-            return redirect()->back()->with('error', "le montant doit être 1000Da ou plus!");
+        } else {
+            return redirect()->back()->with('error', "le montant doit être 1000Da ou plus! et  ne doit pas dépasser votre solde");
         }
-
-
     }
 
     /**
@@ -82,7 +83,7 @@ class PaymentStoreComController extends Controller
     public function recevoir_p_com(UpdatePayment_Store_ComRequest $request,  $id)
     {
 
- 
+
         $engagement = Payment_Store_Com::find($id);
 
 
@@ -91,34 +92,45 @@ class PaymentStoreComController extends Controller
             $file = $request->file('photo_money');
             $photo_money = $file->store('photos_argent', 'public');
 
-            $engagement->update([
+
+
+            $commercial = User::find((Auth::user()->id));
+
+            $new_solde_com = ($commercial->solde + $engagement->montant);
+
+            $seller = User::find($engagement->seller_id);
+
+            $new_solde_seller = ($seller->solde - $engagement->montant);
+
+
+            if (
+                $engagement->update([
                 "commercial_engagement" => 1,
                 "photo_money" =>  $photo_money,
                 "payment_done" =>   1,
-            ]);
+                ])
+            ) 
+            {
 
-            $commercial = User::find((Auth::user()-> id));
-            
-            $new_solde_com = ($commercial -> solde + $engagement->montant) ; 
+                if (
+                    $commercial->update([
+                        "solde" =>  $new_solde_com
+                    ]) 
+                    &&      
+                    $seller->update([
+                        "solde" =>   $new_solde_seller
+                    ])
+                ) 
+                {
 
-            $seller = User::find( $engagement -> seller_id );
-            
-            $new_solde_seller =( $seller->solde - $engagement->montant );
+                    return redirect()->back()->with("success", "Paiement accompli");
+                } else {
+                    return redirect()->back()->with("error", "   Erreur 1  !");
+                }
 
-            $commercial -> update([
-                "solde" =>  $new_solde_com  
-            ]);
-
-            $seller->update([
-                "solde" =>   $new_solde_seller
-            ]);
-
-
-
-            return redirect()->back()->with("success", "Paiement accompli");
-
+            }
         } else {
-            return redirect()->back()->with("error", "Ajouter la photo!");
+            return redirect()->back()->with("error", " Erreur 2    !");
         }
     }
 

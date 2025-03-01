@@ -29,14 +29,14 @@
 
         <h1 class="text-center mb-5"> Ajouter un Paiement </h1>
 
-        @if ($solde > 0)
+        @if ($solde >= 1000)
         <h5>Mon solde : <b> {{ $solde }} Da </b></h5>
             <form action="{{ route('add_p_stoer_com') }}" method="POST">
                 @csrf
                 <div class=" row">
                     <div class="col-md-6">
                         <input type="number" class="form-control" name="montant" required placeholder="Montant (Da)"
-                            min="1000" max="50000">
+                            min="1000"  >
                     </div>
                 </div>
                 <input type="submit" class="btn btn-primary mt-4" value="Payer">
