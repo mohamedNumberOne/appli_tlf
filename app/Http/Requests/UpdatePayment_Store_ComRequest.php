@@ -11,7 +11,7 @@ class UpdatePayment_Store_ComRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return 1;
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdatePayment_Store_ComRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+
+            'photo_money' => 'file|image|mimes:jpeg,png,jpg,gif,bmp,webp',
+
         ];
     }
 }

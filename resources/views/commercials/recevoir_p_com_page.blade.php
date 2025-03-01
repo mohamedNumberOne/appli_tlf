@@ -23,7 +23,7 @@
         @endif
 
         @if (session()->has('error'))
-            <div class="alert alert-success text-center bg-danger text-white">
+            <div class="alert alert-danger text-center bg-danger text-white">
                 {{ session('error') }}
             </div>
         @endif
@@ -46,7 +46,6 @@
                                 <th>id</th>
                                 <th>montant</th>
                                 <th> engagement store </th>
-                                <th> engagement commercial </th>
                                 <th style="min-width: 80px"> Date </th>
                                 <th> photo </th>
                                 
@@ -58,7 +57,7 @@
                                 <th>id</th>
                                 <th>montant</th>
                                 <th> engagement store </th>
-                                <th> engagement commercial </th>
+                              
                                 <th style="min-width: 80px"> Date </th>
                                 <th> photo </th>
                                 
@@ -72,23 +71,12 @@
                                     <td> {{ $engagement->montant }} Da </td>
                                     <td>
                                         @if ($engagement->seller_engagement)
-                                            <i class="fas fa-check-square"></i>
+                                            <i class="fas fa-check-square text-success"></i>
                                         @else
-                                            <i class="fas fa-times"></i>
+                                            <i class="fas fa-times text-danger"></i>
                                         @endif
                                     </td>
-                                    <td>
-                                        @if ($engagement->commercial_engagement)
-                                            <i class="fas fa-check-square"></i>
-                                        @else
-                                          <form action="" method="POST" >
-                                            @csrf
-                                        
-                                            <input class="btn btn-primary p-1  mt-1" type="submit" value="Valider">
-                                           </form>
-                                            
-                                        @endif
-                                    </td>
+                                 
                                     <td> {{ $engagement->created_at }}</td>
 
                                     <td style="max-width: 200px" >
@@ -97,15 +85,15 @@
                                             <img src="{{ asset('assets/' . $engagement->photo_money) }}" alt="image"
                                                 width="80px">
                                         @else
-                                           <form action="" method="POST" enctype="multipart/form-data" >
+                                           <form  action="{{ route('recevoir_p_com' , $engagement->id ) }}"  method="POST" enctype="multipart/form-data" >
                                             @csrf
                                             <input class="form-control" type="file" name="photo_money"  >
-                                            <input class="btn btn-primary p-1  mt-1" type="submit" value="ajouter">
+                                            <input class="btn btn-primary p-1  mt-2" type="submit" value="Valider">
                                            </form>
                                         @endif
 
                                     </td>
- 
+
                                 </tr>
                             @endforeach
                         </tbody>

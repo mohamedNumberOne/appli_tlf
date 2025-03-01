@@ -15,7 +15,6 @@
 @section('content')
     <div class="container">
 
-
         @if (session()->has('success'))
             <div class="alert alert-success text-center bg-success text-white">
                 {{ session('success') }}
@@ -23,7 +22,7 @@
         @endif
 
         @if (session()->has('error'))
-            <div class="alert alert-success text-center bg-danger text-white">
+            <div class="alert alert-danger text-center bg-danger text-white">
                 {{ session('error') }}
             </div>
         @endif
@@ -35,17 +34,16 @@
             <form action="{{ route('add_p_stoer_com') }}" method="POST">
                 @csrf
                 <div class=" row">
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <input type="number" class="form-control" name="montant" required placeholder="Montant (Da)"
                             min="1000" max="50000">
                     </div>
                 </div>
                 <input type="submit" class="btn btn-primary mt-4" value="Payer">
-
             </form>
         @else
             <div class="alert alert-warning bg-warning text-white text-center">
-                Vous ne pouvez pas faire un paiement pour l'instant
+                Vous ne pouvez pas faire un paiement pour l'instant ( Solde : {{ $solde  }} Da.)
             </div>
         @endif
 
@@ -90,16 +88,16 @@
                                     <td> {{ $engagement->montant }} Da </td>
                                     <td>
                                         @if ($engagement->seller_engagement)
-                                            <i class="fas fa-check-square"></i>
+                                            <i class="fas fa-check-square text-success "></i>
                                         @else
-                                            <i class="fas fa-times"></i>
+                                            <i class="fas fa-times text-danger"></i>
                                         @endif
                                     </td>
                                     <td>
                                         @if ($engagement->commercial_engagement)
-                                            <i class="fas fa-check-square"></i>
+                                            <i class="fas fa-check-square text-success"></i>
                                         @else
-                                            <i class="fas fa-times"></i>
+                                            <i class="fas fa-times text-danger"></i>
                                         @endif
                                     </td>
                                     <td> {{ $engagement->created_at }}</td>

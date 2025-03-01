@@ -72,6 +72,7 @@ Route::prefix("commercial")->middleware(["auth" , "verifyIsCommercial" ])->group
     Route::post('/create_store', [UserController::class, 'create_store'])->name('create_store');
     Route::get('/store-liste', [StoreController::class, 'commercial_liste_store'])->name('commercial_liste_store');
     Route::get('/recevoir-paiement', [PaymentStoreComController::class, 'recevoir_p_com_page'])->name('recevoir_p_com_page');
+    Route::post('/recevoir-paiement-com/{id}', [PaymentStoreComController::class, 'recevoir_p_com'])->name('recevoir_p_com');
 
 });
 
