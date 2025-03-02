@@ -92,6 +92,7 @@
                         </tbody>
                     </table>
                 </div>
+                {{ $retours -> links() }}
             </div>
         @else
             <div class="alert alert-warning bg-warning text-center text-white"> pas de Retours </div>

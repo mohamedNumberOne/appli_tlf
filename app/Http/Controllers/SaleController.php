@@ -11,8 +11,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Auth as Auth_user;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use Carbon\Carbon;
+
 
 class SaleController extends Controller
 {
@@ -132,11 +134,25 @@ class SaleController extends Controller
      */
     public function mes_ventes()
     {
+        $today = Carbon::now()->toDateString();
+
         $sales = Sale::join('products', 'products.id', 'sales.product_id')
             ->select('sales.*', 'products.product_name', 'products.prix_garantie')
             ->where('sales.seller_id', '=', (Auth_user::user()->id))
             ->orderBy('sales.created_at', "DESC")
             ->paginate(10);
+
+        $sales = Sale::join('products', 'products.id', 'sales.product_id')
+            ->select(
+                'sales.*',
+                'products.product_name',
+                'products.prix_garantie',
+                DB::raw("DATE_ADD(sales.created_at, INTERVAL products.nb_jr_garantie DAY) as garantie_expiration")
+            )
+            ->where('sales.seller_id', Auth_user::user()->id)
+            ->whereRaw("DATE_ADD(sales.created_at, INTERVAL products.nb_jr_garantie DAY) > ?", [$today]) // Filtrer les ventes encore sous garantie
+            ->orderBy('sales.created_at', "DESC")
+            ->paginate(2);
 
         return view("stores.mes_ventes_page", compact('sales'));
     }
@@ -186,7 +202,7 @@ class SaleController extends Controller
                 'product_id' => 'required|exists:products,id',
                 'imei1' => 'required|digits:15|unique:sales,imei1,' . $sale->id,
                 'sn' => 'required|string|max:255',
-                'info_product_img' => 'file|image|mimes:jpeg,png,jpg,gif,bmp,webp|max:2048',
+                'info_product_img' => 'file|image|mimes:jpeg,png,jpg,gif,bmp,webp',
                 'nom_client' => 'required|string|max:255',
                 'tlf_client' => 'required|digits_between:8,15',
             ];

@@ -117,7 +117,7 @@
                  <!-- Logo Header -->
                  <div class="logo-header" data-background-color="dark">
 
-                     <a href="{{ route('dashboard') }}" class="logo" style=" width: 100px  ;  margin:auto; margin-top:10px">
+                     <a href="{{ route('dashboard_commercial') }}" class="logo" style=" width: 100px  ;  margin:auto; margin-top:10px">
                          <img src="{{ asset('logo.png') }}" alt="navbar brand " style="width: 100%;" class="navbar-brand" />
                      </a>
 
@@ -211,7 +211,7 @@
                  <!-- Logo Header -->
                  <div class="logo-header" data-background-color="dark">
 
-                     <a href="{{ route('dashboard') }}" class="logo" style=" width: 100px  ;  margin:auto; margin-top:10px">
+                     <a href="{{ route('dashboard_store') }}" class="logo" style=" width: 100px  ;  margin:auto; margin-top:10px">
                          <img src="{{ asset('logo.png') }}" alt="navbar brand " style="width: 100%;"
                              class="navbar-brand" />
                      </a>

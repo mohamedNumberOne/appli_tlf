@@ -9,7 +9,7 @@
 @endsection
 
 @section('title')
-    Ventes
+    Ajouter une vente
 @endsection
 
 @section('side_bare')

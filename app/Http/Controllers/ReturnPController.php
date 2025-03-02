@@ -6,7 +6,12 @@ use App\Models\Return_p;
 use App\Http\Requests\StoreReturn_pRequest;
 use App\Http\Requests\UpdateReturn_pRequest;
 use App\Models\Sale;
+
 use Illuminate\Support\Facades\Auth;
+
+
+ 
+ 
 
 
 class ReturnPController extends Controller
@@ -21,8 +26,6 @@ class ReturnPController extends Controller
         $sale =  Sale::find($sale_id);
 
         if ($sale) {
-
-            // verifier ida yakder ydir  retour ( nb jour garantie ida khlas wla  mazl )
 
                 Return_p::create([
 
@@ -47,7 +50,11 @@ class ReturnPController extends Controller
     {
 
 
+
         // verifier ida yakder ydir  retour ( nb jour garantie ida khlas wla  mazl )
+
+    
+
 
         $retours =  Return_p::leftJoin('sales', "return_ps.sale_id", "sales.id")
             ->leftJoin('products', "products.id", "sales.product_id")
@@ -63,7 +70,7 @@ class ReturnPController extends Controller
                 "return_ps.created_at as date_retour"
             )
             ->where('sales.seller_id', '=',  Auth::user()->id)
-            ->get();
+            ->paginate(10);
 
         return view("stores.page_retour", compact("retours"));
     }

@@ -93,7 +93,6 @@ Route::prefix("store")->middleware(["auth" , "VerifyIsPropStore"])->group(functi
     Route::get('/ajouter-paiement', [PaymentStoreComController::class, 'ajouter_paiement_page'])->name('ajouter_paiement_page');
     Route::post('/add_p_stoer_com', [PaymentStoreComController::class, 'add_p_stoer_com'])->name('add_p_stoer_com');
 
-    
 
 });
 

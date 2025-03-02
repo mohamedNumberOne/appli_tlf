@@ -23,7 +23,7 @@ class UpdatePayment_Store_ComRequest extends FormRequest
     {
         return [
 
-            'photo_money' => 'file|image|mimes:jpeg,png,jpg,gif,bmp,webp',
+            'photo_money' => 'required|file|image|mimes:jpeg,png,jpg,gif,bmp,webp',
 
         ];
     }

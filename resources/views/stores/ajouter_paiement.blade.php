@@ -35,8 +35,7 @@
                 @csrf
                 <div class=" row">
                     <div class="col-md-6">
-                        <input type="number" class="form-control" name="montant" required placeholder="Montant (Da)"
-                            min="1000"  >
+                        <input type="number" class="form-control" name="montant" required placeholder="Montant (Da)"  min="1000"  >
                     </div>
                 </div>
                 <input type="submit" class="btn btn-primary mt-4" value="Payer">
