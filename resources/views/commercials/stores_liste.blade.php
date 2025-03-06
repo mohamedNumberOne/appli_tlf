@@ -55,7 +55,7 @@
                                     <th scope="row"> {{ $store->store_id }} </th>
                                     <td>{{ $store->store_name }} </td>
                                     <td>{{ $store->prop_name }} </td>
-                                    <td>{{ $store->total_to_pay }} DA </td>
+                                    <td>{{ $store-> total_to_pay }} DA </td>
                                     <td>{{ $store->tlf_prop }} </td>
                                     <td>{{ $store->email_prop }} </td>
                                     <td>

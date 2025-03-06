@@ -30,7 +30,7 @@
 
         <h1 class="text-center"> Mes ventes </h1>
  
-
+ 
         @if (count($sales) > 0)
             <div class="card-body">
                 <div class="table-responsive">

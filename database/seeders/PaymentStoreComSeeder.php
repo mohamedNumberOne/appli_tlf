@@ -12,6 +12,6 @@ class PaymentStoreComSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+         
     }
 }

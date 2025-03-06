@@ -46,10 +46,7 @@
                                 <th>id</th>
                                 <th>montant</th>
                                 <th> engagement store </th>
-                                <th style="min-width: 80px"> Date </th>
                                 <th> photo </th>
-                                
-
                             </tr>
                         </thead>
                         <tfoot>
@@ -57,10 +54,7 @@
                                 <th>id</th>
                                 <th>montant</th>
                                 <th> engagement store </th>
-                              
-                                <th style="min-width: 80px"> Date </th>
                                 <th> photo </th>
-                                
                             </tr>
                         </tfoot>
                         <tbody>
@@ -72,18 +66,20 @@
                                     <td>
                                         @if ($engagement->seller_engagement)
                                             <i class="fas fa-check-square text-success"></i>
+                                            {{ $engagement->created_at }}
                                         @else
                                             <i class="fas fa-times text-danger"></i>
                                         @endif
                                     </td>
                                  
-                                    <td> {{ $engagement->created_at }}</td>
+                                   
 
                                     <td style="max-width: 200px" >
 
                                         @if ($engagement->photo_money)
                                             <img src="{{ asset('assets/' . $engagement->photo_money) }}" alt="image"
                                                 width="80px">
+                                                  {{ $engagement-> date_confirm_com }}
                                         @else
                                            <form  action="{{ route('recevoir_p_com' , $engagement->id ) }}"  method="POST" enctype="multipart/form-data" >
                                             @csrf

@@ -19,7 +19,8 @@ class Payment_Store_Com extends Model
         "photo_money",
         "montant",
         "payment_done",
-
+        "date_confirm_com",
+        
     ];
 
 }

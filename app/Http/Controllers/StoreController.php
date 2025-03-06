@@ -21,6 +21,7 @@ class StoreController extends Controller
 
     public function liste_store()
     {
+
         $all_stores =
             Store::join('users as owner', 'stores.id_prop', '=', 'owner.id') // Jointure pour obtenir le propriétaire
             ->leftJoin('users as commercial', 'stores.id_added_by_com', '=', 'commercial.id') // Jointure pour obtenir le commercial
@@ -31,7 +32,7 @@ class StoreController extends Controller
                 'owner.email as email_prop', // email du propriétaire
                 'owner.tlf as tlf_prop', // tlf du propriétaire
                 'commercial.name as commercial_name', // Nom du commercial
-                'stores.total_to_pay' //   total_to_pay
+            'owner.solde as total_to_pay' //   solde_store 
             )
 
             ->orderBy('stores.created_at', "DESC")->paginate(15);
@@ -53,11 +54,11 @@ class StoreController extends Controller
                 'owner.email as email_prop', // email du propriétaire
                 'owner.tlf as tlf_prop', // tlf du propriétaire
                 'commercial.name as commercial_name', // Nom du commercial
-                'stores.total_to_pay' //   total_to_pay
+                'owner.solde as total_to_pay' //   total_to_pay
             )
 
             ->orderBy('stores.created_at', "DESC")
-            ->where('stores.id_added_by_com', '=',  Auth::user()-> id )
+            ->where('stores.id_added_by_com', '=',  Auth::user()->id)
             ->paginate(15);
 
         return view("commercials.stores_liste", compact("all_stores"));

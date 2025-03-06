@@ -62,7 +62,7 @@
                                 <th>montant</th>
                                 <th> engagement store </th>
                                 <th> engagement commercial </th>
-                                <th style="min-width: 80px"> Date </th>
+                              
                                 <th> photo </th>
                                 
 
@@ -74,9 +74,7 @@
                                 <th>montant</th>
                                 <th> engagement store </th>
                                 <th> engagement commercial </th>
-                                <th style="min-width: 80px"> Date </th>
                                 <th> photo </th>
-                                
                             </tr>
                         </tfoot>
                         <tbody>
@@ -87,7 +85,9 @@
                                     <td> {{ $engagement->montant }} Da </td>
                                     <td>
                                         @if ($engagement->seller_engagement)
-                                            <i class="fas fa-check-square text-success "></i>
+                                            <i class="fas fa-check-square text-success "></i> 
+                                          
+                                             {{ $engagement->created_at }}
                                         @else
                                             <i class="fas fa-times text-danger"></i>
                                         @endif
@@ -95,11 +95,12 @@
                                     <td>
                                         @if ($engagement->commercial_engagement)
                                             <i class="fas fa-check-square text-success"></i>
+                                             {{ $engagement-> date_confirm_com }}
                                         @else
                                             <i class="fas fa-times text-danger"></i>
                                         @endif
                                     </td>
-                                    <td> {{ $engagement->created_at }}</td>
+                                    
 
                                     <td>
 

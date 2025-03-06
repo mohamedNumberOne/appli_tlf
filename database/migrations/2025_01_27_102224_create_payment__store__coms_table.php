@@ -19,7 +19,8 @@ return new class extends Migration
             $table->boolean('commercial_engagement')->default(0);
             $table->string('photo_money')->nullable();  
             $table->unsignedSmallInteger('montant');
-            $table->boolean('payment_done')->default(0);  
+            $table->boolean('payment_done')->default(0);
+            $table->dateTime('date_confirm_com')->nullable();
 
 
             $table->foreign("seller_id")->references('id')->on('users')->onDelete('SET NULL');

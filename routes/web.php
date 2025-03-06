@@ -48,8 +48,6 @@ Route::prefix("admin")->middleware([ "auth" , "VerifyIsAdmin" ])->group(function
     Route::post('/add_product', [ProductController::class, 'add_product'])->name('add_product');
 
 
-
-
     // users
     Route::post('/create_user', [UserController::class, 'create_user'])->name('create_user');
     Route::get('/update-admin/{id}', [UserController::class, 'update_admin_page'])->name('update_admin_page');
@@ -72,7 +70,7 @@ Route::prefix("commercial")->middleware(["auth" , "verifyIsCommercial" ])->group
     Route::post('/create_store', [UserController::class, 'create_store'])->name('create_store');
     Route::get('/store-liste', [StoreController::class, 'commercial_liste_store'])->name('commercial_liste_store');
     Route::get('/recevoir-paiement', [PaymentStoreComController::class, 'recevoir_p_com_page'])->name('recevoir_p_com_page');
-    Route::post('/recevoir-paiement-com/{id}', [PaymentStoreComController::class, 'recevoir_p_com'])->name('recevoir_p_com');
+    Route::post('/recevoir-paiement-com/{id}', [PaymentStoreComController::class, 'recevoir_p_com'])->name('recevoir_p_com'); 
 
 });
 

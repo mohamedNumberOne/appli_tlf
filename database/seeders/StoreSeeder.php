@@ -13,10 +13,6 @@ class StoreSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('sales')->insert([
-            'brand_name' =>  "Samsung",
-            'brand_img' =>  "image",
-            'brand_description' =>  "brand_description",
-        ]);
+         
     }
 }

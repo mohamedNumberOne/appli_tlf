@@ -21,7 +21,6 @@ return new class extends Migration
 
             $table->unsignedSmallInteger('montant');
 
-
             $table->foreign("admin_id")->references('id')->on('users')->onDelete('SET NULL');
             $table->foreign("commercial_id")->references('id')->on('users')->onDelete('SET NULL');
             $table->foreign("id_payment__store__com")->references('id')->on('payment__store__coms')->onDelete('SET NULL');

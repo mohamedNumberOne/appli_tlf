@@ -134,27 +134,28 @@ class SaleController extends Controller
      */
     public function mes_ventes()
     {
-        $today = Carbon::now()->toDateString();
+        $today = Carbon::now()->toDateTimeString();
 
-        $sales = Sale::join('products', 'products.id', 'sales.product_id')
-            ->select('sales.*', 'products.product_name', 'products.prix_garantie')
-            ->where('sales.seller_id', '=', (Auth_user::user()->id))
-            ->orderBy('sales.created_at', "DESC")
-            ->paginate(10);
+        // $sales = Sale::join('products', 'products.id', 'sales.product_id')
+        //     ->select('sales.*', 'products.product_name', 'products.prix_garantie')
+        //     ->where('sales.seller_id', '=', (Auth_user::user()->id))
+        //     ->orderBy('sales.created_at', "DESC")
+        //     ->paginate(15);
 
         $sales = Sale::join('products', 'products.id', 'sales.product_id')
             ->select(
                 'sales.*',
                 'products.product_name',
                 'products.prix_garantie',
-                DB::raw("DATE_ADD(sales.created_at, INTERVAL products.nb_jr_garantie DAY) as garantie_expiration")
+                DB::raw("DATE_ADD(sales.created_at, INTERVAL products.nb_jr_garantie DAY) as garantie_expiration") 
             )
             ->where('sales.seller_id', Auth_user::user()->id)
-            ->whereRaw("DATE_ADD(sales.created_at, INTERVAL products.nb_jr_garantie DAY) > ?", [$today]) // Filtrer les ventes encore sous garantie
+            ->whereRaw("DATE_ADD(sales.created_at, INTERVAL products.nb_jr_garantie DAY) >=  ?", $today ) 
+            // Filtrer les ventes encore sous garantie
             ->orderBy('sales.created_at', "DESC")
-            ->paginate(2);
+            ->paginate(15);
 
-        return view("stores.mes_ventes_page", compact('sales'));
+        return view("stores.mes_ventes_page", compact('sales'  ));
     }
 
     /**

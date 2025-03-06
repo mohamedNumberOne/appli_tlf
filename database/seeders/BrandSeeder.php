@@ -13,10 +13,32 @@ class BrandSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('brands')->insert([
-            'brand_name' =>  "Samsung",
-            'brand_img' =>  "image",
-            'brand_description' =>  "brand_description",
-        ]);
+        DB::table('brands')->insert(
+
+            [
+
+                [
+                    "id" =>  1,
+                    'brand_name' =>  "Samsung",
+
+                ],
+                [
+                    "id" =>  2,
+                    'brand_name' =>  "Oppo",
+
+                ],
+                [
+                    "id" =>  3,
+                    'brand_name' =>  "Apple",
+
+                ],
+                [
+                    "id" => 4,
+                    'brand_name' =>  "Redmi",
+
+                ]
+            ]
+
+        );
     }
 }
