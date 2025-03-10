@@ -18,6 +18,9 @@ class Sale extends Model
         "info_product_img",
         "nom_client",
         "tlf_client",
-        "seller_id"
+        "seller_id",
+        'g_tlf',
+        'batterie',
+        'circuit',
     ];
 }

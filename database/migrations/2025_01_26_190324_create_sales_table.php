@@ -22,7 +22,14 @@ return new class extends Migration
             $table->string('sn') ;
             $table->string('info_product_img');
             $table->string('nom_client'); 
-            $table->string('tlf_client'); 
+            $table->string('tlf_client');
+
+
+            $table->boolean('g_tlf') -> nullable() ;
+            $table->boolean('batterie') -> nullable() ;
+            $table->boolean('circuit') -> nullable() ;
+
+
             $table-> foreign("product_id") -> references('id') ->  on('products')->onDelete('SET NULL');
             $table->foreign("seller_id")->references('id')->on('users')->onDelete('SET NULL');
             $table->timestamps();

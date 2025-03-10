@@ -66,7 +66,7 @@
                     <div class="form-group col-md-4">
                         <label for="nom_pro"> Nom produit </label>
                         <input type="text" class="form-control" id="nom_pro" name="nom_pro" required
-                            value="{{ $product->product_name }}">
+                            value="{{ $product->product_name }}"  >
                         @error('nom_pro')
                             <span class="text-danger"> {{ $message }} </span>
                         @enderror
@@ -74,15 +74,37 @@
                 </div>
 
 
+
+                     <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="g_tlf">G. Téléphone</label>
+                    <input type="number" class="form-control" id="g_tlf" name="prix_g_tlf" required value="{{ $product->prix_g_tlf }}" >
+                    @error('prix_g_tlf')
+                        <span class="text-danger"> {{ $message }} </span>
+                    @enderror
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="circuit">G. Circuit de charge</label>
+                    <input type="number" class="form-control" id="circuit" name="prix_g_circuit" required value="{{ $product->prix_g_circuit }}" >
+                    @error('prix_g_circuit')
+                        <span class="text-danger"> {{ $message }} </span>
+                    @enderror
+                </div>
+
+
+                <div class="form-group col-md-4">
+                    <label for="batterie">G. Batterie</label>
+                    <input type="number" class="form-control" id="batterie" name="prix_g_batterie" required value="{{ $product->prix_g_batterie }}" >
+                    @error('prix_g_batterie')
+                        <span class="text-danger"> {{ $message }} </span>
+                    @enderror
+                </div>
+            </div>
+
+
                 <div class="row">
-                    <div class="form-group col-md-4">
-                        <label for="prix_garantie">prix de garantie</label>
-                        <input type="number" class="form-control" id="prix_garantie" name="prix_garantie" required
-                            value="{{ $product->prix_garantie }}">
-                        @error('prix_garantie')
-                            <span class="text-danger"> {{ $message }} </span>
-                        @enderror
-                    </div>
+
                     <div class="form-group col-md-4">
                         <label for="nb_jr_garantie">jrs garantie</label>
                         <input type="number" class="form-control" id="nb_jr_garantie" name="nb_jr_garantie" required
@@ -97,9 +119,9 @@
                             <option> </option>
                             @if ($product->double_puce)
                                 <option value="1" selected> oui </option>
-                                <option value="0" > non </option>
+                                <option value="0"> non </option>
                             @else
-                                <option value="1" > oui </option>
+                                <option value="1"> oui </option>
                                 <option value="0" selected> non </option>
                             @endif
                         </select>

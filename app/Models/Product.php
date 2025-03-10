@@ -15,9 +15,12 @@ class Product extends Model
         "category_id",
         "brand_id",
         "product_name",
-        "prix_garantie",
         "nb_jr_garantie",
         "double_puce",
+        'prix_g_tlf',
+        'prix_g_circuit',
+        'prix_g_batterie',
+
 
     ];
 }

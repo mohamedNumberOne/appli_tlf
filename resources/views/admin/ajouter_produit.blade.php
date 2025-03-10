@@ -30,7 +30,9 @@
         @endif
 
         <h1 class="text-center"> Ajouter un Produit </h1>
+
         <form method="post" action="{{ route('add_product') }}">
+
             @csrf
 
             <div class="row">
@@ -46,6 +48,7 @@
                         <span class="text-danger"> {{ $message }} </span>
                     @enderror
                 </div>
+
                 <div class="form-group col-md-4">
                     <label for="marque"> Maruqe </label>
                     <select class="form-control" id="marque" name="brand_id" required>
@@ -68,14 +71,37 @@
             </div>
 
 
+
+
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label for="prix_garantie">prix de garantie</label>
-                    <input type="number" class="form-control" id="prix_garantie" name="prix_garantie" required>
-                    @error('prix_garantie')
+                    <label for="g_tlf">G. Téléphone</label>
+                    <input type="number" class="form-control" id="g_tlf" name="prix_g_tlf" required>
+                    @error('prix_g_tlf')
                         <span class="text-danger"> {{ $message }} </span>
                     @enderror
                 </div>
+
+                <div class="form-group col-md-4">
+                    <label for="circuit">G. Circuit de charge</label>
+                    <input type="number" class="form-control" id="circuit" name="prix_g_circuit" required>
+                    @error('prix_g_circuit')
+                        <span class="text-danger"> {{ $message }} </span>
+                    @enderror
+                </div>
+
+
+                <div class="form-group col-md-4">
+                    <label for="batterie">G. Batterie</label>
+                    <input type="number" class="form-control" id="batterie" name="prix_g_batterie" required>
+                    @error('prix_g_batterie')
+                        <span class="text-danger"> {{ $message }} </span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="row">
+
                 <div class="form-group col-md-4">
                     <label for="nb_jr_garantie">jrs garantie</label>
                     <input type="number" class="form-control" id="nb_jr_garantie" name="nb_jr_garantie" required
@@ -117,7 +143,6 @@
                                 <th>garantie</th>
                                 <th> jrs garantie </th>
                                 <th> double puce </th>
-
                                 <th> Action </th>
                             </tr>
                         </thead>
@@ -130,7 +155,6 @@
                                 <th>garantie</th>
                                 <th> jrs garantie </th>
                                 <th> double puce </th>
-
                                 <th> Action </th>
                             </tr>
                         </tfoot>
@@ -142,8 +166,15 @@
                                     <td>{{ $pro->product_name }} </td>
                                     <td>{{ $pro->category_name }} </td>
                                     <td>{{ $pro->brand_name }} </td>
-                                    <td>{{ $pro->prix_garantie }} DA </td>
+
+                                    <td>
+                                        <span class="badge bg-primary"> Téléphone {{ $pro->prix_g_tlf }} Da </span><br>
+                                        <span class="badge bg-primary"> Batterie {{ $pro->prix_g_batterie }} Da </span><br>
+                                        <span class="badge bg-primary"> Circuit {{ $pro->prix_g_circuit }} Da </span>
+                                    </td>
+
                                     <td>{{ $pro->nb_jr_garantie }} </td>
+
                                     <td>
                                         @if ($pro->double_puce)
                                             oui
@@ -204,7 +235,7 @@
                     </table>
                 </div>
             </div>
-            {{ $all_pro -> links() }}
+            {{ $all_pro->links() }}
         @else
             <div class="alert alert-warning bg-warning text-center text-white"> pas de produits </div>
         @endif
@@ -212,8 +243,6 @@
 @endsection
 
 @section('js')
- 
-
     <script>
         $(document).ready(function() {
             $("#basic-datatables").DataTable({});

@@ -5,14 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Warranty extends Model
+class Warranty_Product extends Model
 {
-    /** @use HasFactory<\Database\Factories\WarrantyFactory> */
+    /** @use HasFactory<\Database\Factories\WarrantyProductFactory> */
     use HasFactory;
-
+    
     protected $fillable = [
-        "nom_garantie",
-       
 
+        'warranty_id',
+        'product_id',
+        'prix',
+         
     ] ;
 }

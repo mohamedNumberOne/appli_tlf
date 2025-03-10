@@ -16,10 +16,15 @@ return new class extends Migration
             $table->unsignedBigInteger("category_id")->nullable();
             $table->unsignedBigInteger("brand_id")->nullable();
             $table->string("product_name");
-            $table->unsignedSmallInteger("prix_garantie")->nullable()->default(0);
             $table->unsignedSmallInteger("nb_jr_garantie")->nullable();
             $table->boolean("double_puce");
             $table->boolean("actif")->default(1);
+
+
+            $table->integer("prix_g_tlf");
+            $table->integer("prix_g_batterie");
+            $table->integer("prix_g_circuit");
+
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('SET NULL');
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('SET NULL');

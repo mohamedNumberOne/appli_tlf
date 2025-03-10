@@ -16,7 +16,6 @@ return new class extends Migration
             $table->unsignedBigInteger('admin_id')->nullable();
             $table->unsignedBigInteger('commercial_id')->nullable();
             $table->unsignedBigInteger('id_payment__store__com')->nullable();
-
             $table->boolean('payment_done')->default(0);
 
             $table->unsignedSmallInteger('montant');
