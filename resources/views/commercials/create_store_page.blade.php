@@ -35,7 +35,7 @@
             <div class="row">
                 <div class="form-group col-md-4">
                     <label for="store_name">Nom du magasin</label>
-                    <input type="text" class="form-control" id="store_name" name="store_name"  >
+                    <input type="text" class="form-control" id="store_name" name="store_name" required >
                      
                     @error('store_name')
                         <span class="text-danger"> {{ $message }} </span>
@@ -44,7 +44,7 @@
                 <div class="form-group col-md-4">
                     <label for="adresse">Adresse </label>
                  
-                    <input type="text" class="form-control" id="adresse" name="adresse"  >                    
+                    <input type="text" class="form-control" id="adresse" name="adresse"  required >                    
                     @error('adresse')
                         <span class="text-danger"> {{ $message }} </span>
                     @enderror

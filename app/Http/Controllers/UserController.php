@@ -19,7 +19,6 @@ use Illuminate\Http\Request;
 class UserController extends StoreController
 {
 
-
     public function dashboard()
     {
         $store_users = User::where('role', "prop_store")->orderBy('created_at', 'desc')->paginate(10);

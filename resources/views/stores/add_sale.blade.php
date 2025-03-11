@@ -6,6 +6,57 @@
 
 @section('css')
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <style>
+        /* To hide the checkbox */
+        #checkboxInput,
+        #checkboxInput2,
+        #checkboxInput3 {
+            display: none;
+        }
+
+        .toggleSwitch {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 50px;
+            height: 30px;
+            background-color: rgb(82, 82, 82);
+            border-radius: 20px;
+            cursor: pointer;
+            transition-duration: .2s;
+        }
+
+        .toggleSwitch::after {
+            content: "";
+            position: absolute;
+            height: 10px;
+            width: 10px;
+            left: 5px;
+            background-color: transparent;
+            border-radius: 50%;
+            transition-duration: .2s;
+            box-shadow: 5px 2px 7px rgba(8, 8, 8, 0.26);
+            border: 5px solid white;
+        }
+
+        #checkboxInput:checked+.toggleSwitch::after,
+        #checkboxInput2:checked+.toggleSwitch::after,
+        #checkboxInput3:checked+.toggleSwitch::after {
+            transform: translateX(100%);
+            transition-duration: .2s;
+            background-color: white;
+            left: 20px;
+        }
+
+        /* Switch background change */
+        #checkboxInput:checked+.toggleSwitch,
+        #checkboxInput2:checked+.toggleSwitch,
+        #checkboxInput3:checked+.toggleSwitch {
+            background-color: #1572e8 !important;
+            transition-duration: .2s;
+        }
+    </style>
 @endsection
 
 @section('title')
@@ -18,7 +69,6 @@
 
 @section('content')
     <div class="container">
-
 
 
         @if (session()->has('success'))
@@ -42,12 +92,12 @@
                 <div class="form-group col-md-4">
                     <label for="product_id">Produit</label>
 
-                    <select id="product_id" name="product_id" class="form-control">
+                    <select id="product_id" name="product_id" class="form-control" required>
                         <option value="">
                             @foreach ($all_pro as $pro)
                         <option value="{{ $pro->id }}" {{ old('product_id') == $pro->id ? 'selected' : '' }}
                             {{ $pro->double_puce == 1 ? 'data-dp=true' : '' }}>
-                            {{ $pro->product_name }}     
+                            {{ $pro->product_name }}
                         </option>
                         @endforeach
                     </select>
@@ -113,8 +163,8 @@
                 <div class="form-group col-md-2">
                     <label for="info_product_img"> Image </label>
                     <input type="file" class="form-control" id="info_product_img" name="info_product_img" required
-                        accept="image/*"   >
-                        {{-- capture="camera" --}}
+                        accept="image/*">
+                    {{-- capture="camera" --}}
                     @error('info_product_img')
                         <span class="text-danger"> {{ $message }} </span>
                     @enderror
@@ -122,7 +172,43 @@
 
             </div>
 
-            <button type="submit" class="btn btn-primary w-100 mt-2 mb-3"> Ajouter </button>
+            <hr>
+
+            <h4> Type de garantie : </h4>
+
+            <div class="row mt-4">
+
+
+
+                <div class="col-md-3">
+                    <label for="checkboxInput"> Téléphone </label>
+                    <input type="checkbox" id="checkboxInput" value="g_tlf" name="g_tlf[]">
+                    <label for="checkboxInput" class="toggleSwitch"></label>
+
+                </div>
+
+                <div class="col-md-3">
+                    <label for="checkboxInput2"> Circuit de charge </label>
+                    <input type="checkbox" id="checkboxInput2" value="circuit" name="circuit[]">
+                    <label for="checkboxInput2" class="toggleSwitch"></label>
+
+                </div>
+
+
+                <div class="col-md-3">
+                    <label for="checkboxInput3"> Batterie</label>
+                    <input type="checkbox" id="checkboxInput3" value="batterie" name="batterie[]">
+                    <label for="checkboxInput3" class="toggleSwitch"></label>
+
+                </div>
+
+            </div>
+
+            @error('type_garantie')
+                <span class="text-danger"> {{ $message }} </span>
+            @enderror
+
+            <button type="submit" class="btn btn-primary w-100 mt-5 mb-3"> Ajouter </button>
         </form>
 
 
@@ -141,13 +227,16 @@
         if (!(selectedOption.value != "" && selectedOption.getAttribute('data-dp') == "true")) {
             imei2.value = "";
             imei2.disabled = 1;
-        }  
+        }
 
         $(document).ready(function() {
             $('#product_id').change(function() {
 
                 var productId = $(this).val();
+
                 if (productId) {
+
+
                     var url = "{{ route('get_info_pro_ajax', ':id') }}".replace(':id', productId);
 
                     $.ajax({
@@ -174,9 +263,14 @@
 
                         }
                     });
+
                 } else {
                     // $('#productName, #productPrice, #productDescription').text(''); 
-                    $('#pro_info').text("");
+                 
+                    imei2.value = "";
+                    imei2.disabled = 1;
+                     
+
                 }
             });
         });

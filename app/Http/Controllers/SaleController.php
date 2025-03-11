@@ -35,11 +35,16 @@ class SaleController extends Controller
     {
 
 
+
         $id_pro = $request->product_id;
 
         $pro = Product::find($id_pro);
 
         if ($pro) {
+
+            $g_tlf =  implode('', $request->input('g_tlf', []));
+            $circuit =  implode('', $request->input('circuit', []));
+            $batterie =  implode('', $request->input('batterie', []));
 
 
             $imei2 =   NULL;
@@ -53,6 +58,11 @@ class SaleController extends Controller
                 'info_product_img' => 'required|file|image|mimes:jpeg,png,jpg,gif,bmp,webp|max:2048',
                 'nom_client' => 'required|string|max:255',
                 'tlf_client' => 'required|digits_between:8,15',
+
+                'g_tlf.*' => 'in:g_tlf',
+                'circuit.*' => 'in:circuit',
+                'batterie.*' => 'in:batterie',
+
             ];
 
             // Ajouter la validation de imei2 si le produit est double puce
@@ -69,13 +79,39 @@ class SaleController extends Controller
                     'imei1.digits' => 'IMEI1 doit contenir 15 chiffres',
                     'imei2.digits' => 'IMEI2 doit contenir 15 chiffres',
                     'imei1.unique' => 'IMEI1 existe déja !',
-                    'imei2.unique' => 'IMEI2  existe déja !'
+                    'imei2.unique' => 'IMEI2  existe déja !',
+               
                 ]
             );
 
 
 
             if ($validated) {
+
+
+
+
+                if (! empty(trim($g_tlf))) {
+                    $g_tlf = 1;
+                } else {
+                    $g_tlf = 0;
+                }
+
+
+                if (! empty(trim($circuit))) {
+                    $circuit = 1;
+                } else {
+                    $circuit = 0;
+                }
+
+
+                if (! empty(trim($batterie))) {
+                    $batterie = 1;
+                } else {
+                    $batterie = 0;
+                }
+
+              
 
                 if ($request->hasFile('info_product_img')  &&  $request->file('info_product_img')->isValid()) {
 
@@ -84,6 +120,8 @@ class SaleController extends Controller
                 } else {
                     $info_product_img  = NULL;
                 }
+
+
 
 
                 $seller_id = Auth_user::user()->id;
@@ -98,6 +136,10 @@ class SaleController extends Controller
                     'info_product_img' => $info_product_img,
                     'nom_client' => $request->nom_client,
                     'tlf_client' => $request->tlf_client,
+
+                    'g_tlf' =>  $g_tlf,
+                    'batterie' =>  $batterie,
+                    'circuit' =>  $circuit,
 
                 ]);
 
@@ -147,15 +189,15 @@ class SaleController extends Controller
                 'sales.*',
                 'products.product_name',
                 'products.prix_garantie',
-                DB::raw("DATE_ADD(sales.created_at, INTERVAL products.nb_jr_garantie DAY) as garantie_expiration") 
+                DB::raw("DATE_ADD(sales.created_at, INTERVAL products.nb_jr_garantie DAY) as garantie_expiration")
             )
             ->where('sales.seller_id', Auth_user::user()->id)
-            ->whereRaw("DATE_ADD(sales.created_at, INTERVAL products.nb_jr_garantie DAY) >=  ?", $today ) 
+            ->whereRaw("DATE_ADD(sales.created_at, INTERVAL products.nb_jr_garantie DAY) >=  ?", $today)
             // Filtrer les ventes encore sous garantie
             ->orderBy('sales.created_at', "DESC")
             ->paginate(15);
 
-        return view("stores.mes_ventes_page", compact('sales'  ));
+        return view("stores.mes_ventes_page", compact('sales'));
     }
 
     /**
