@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment_Com_Admin;
+use App\Models\Payment_Store_Com;
 use App\Http\Requests\StorePayment_Com_AdminRequest;
 use App\Http\Requests\UpdatePayment_Com_AdminRequest;
+
 
 class PaymentComAdminController extends Controller
 {
@@ -13,16 +15,19 @@ class PaymentComAdminController extends Controller
      */
     public function paiement_commerciaux_page()
     {
-        return view("admin.paiement_commerciaux") ;
+        $all_p_confirmed =  Payment_Store_Com::where('payment_done', 1) -> paginate(10) ;
+         
+        return view("admin.paiement_commerciaux" , compact("all_p_confirmed") ) ;
 
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function recevoir_p_admin()
     {
-        //
+      
+       
     }
 
     /**

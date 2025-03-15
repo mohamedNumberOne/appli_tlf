@@ -22,5 +22,7 @@ class Sale extends Model
         'g_tlf',
         'batterie',
         'circuit',
+        'total_garantie',
+        
     ];
 }

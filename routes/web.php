@@ -9,7 +9,7 @@ use App\Http\Controllers\StoreController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ReturnPController;
 
- 
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -31,13 +31,13 @@ Route::middleware('auth')->group(function () {
 
 
 // ADMIN 
-Route::prefix("admin")->middleware([ "auth" , "VerifyIsAdmin" ])->group(function () {
+Route::prefix("admin")->middleware(["auth", "VerifyIsAdmin"])->group(function () {
 
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     Route::get('/paiement-store', [PaymentStoreComController::class, 'paiement_store_page'])->name('paiement_store');
     Route::get('/paiement-commerciaux', [PaymentComAdminController::class, 'paiement_commerciaux_page'])
-    ->name('paiement_commerciaux');
-
+        ->name('paiement_commerciaux');
+    Route::post('/paiement-admin', [PaymentComAdminController::class, 'recevoir_p_admin'])->name('recevoir_p_admin'); 
 
 
     // produits
@@ -58,26 +58,24 @@ Route::prefix("admin")->middleware([ "auth" , "VerifyIsAdmin" ])->group(function
 
 
     Route::get('/store-liste', [StoreController::class, 'liste_store'])->name('liste_store');
-    
 });
 
 
 // Commercial 
-Route::prefix("commercial")->middleware(["auth" , "verifyIsCommercial" ])->group(function () {
+Route::prefix("commercial")->middleware(["auth", "verifyIsCommercial"])->group(function () {
 
     Route::get('/dashboard', [UserController::class, 'dashboard_commercial'])->name('dashboard_commercial');
     Route::get('/create-store', [UserController::class, 'create_store_page'])->name('create_store_page');
     Route::post('/create_store', [UserController::class, 'create_store'])->name('create_store');
     Route::get('/store-liste', [StoreController::class, 'commercial_liste_store'])->name('commercial_liste_store');
     Route::get('/recevoir-paiement', [PaymentStoreComController::class, 'recevoir_p_com_page'])->name('recevoir_p_com_page');
-    Route::post('/recevoir-paiement-com/{id}', [PaymentStoreComController::class, 'recevoir_p_com'])->name('recevoir_p_com'); 
-
+    Route::post('/recevoir-paiement-com/{id}', [PaymentStoreComController::class, 'recevoir_p_com'])->name('recevoir_p_com');
 });
 
 
 
 // prop_store 
-Route::prefix("store")->middleware(["auth" , "VerifyIsPropStore"])->group(function () {
+Route::prefix("store")->middleware(["auth", "VerifyIsPropStore"])->group(function () {
 
     Route::get('/dashboard', [UserController::class, 'dashboard_store'])->name('dashboard_store');
     Route::get('/ajouter-vente', [SaleController::class, 'ajouter_vente_page'])->name('ajouter_vente_page');
@@ -90,9 +88,7 @@ Route::prefix("store")->middleware(["auth" , "VerifyIsPropStore"])->group(functi
     Route::get('/mes-retours', [ReturnPController::class, 'page_retours'])->name('page_retours');
     Route::get('/ajouter-paiement', [PaymentStoreComController::class, 'ajouter_paiement_page'])->name('ajouter_paiement_page');
     Route::post('/add_p_stoer_com', [PaymentStoreComController::class, 'add_p_stoer_com'])->name('add_p_stoer_com');
-
-
 });
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

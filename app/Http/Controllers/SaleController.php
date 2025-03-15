@@ -55,7 +55,7 @@ class SaleController extends Controller
 
                 'imei1' => 'required|digits:15|unique:sales,imei1',
                 'sn' => 'required|string|max:255',
-                'info_product_img' => 'required|file|image|mimes:jpeg,png,jpg,gif,bmp,webp|max:2048',
+                'info_product_img' => 'required|file|image|mimes:jpeg,png,jpg,gif,bmp,webp|max:8048',
                 'nom_client' => 'required|string|max:255',
                 'tlf_client' => 'required|digits_between:8,15',
 
@@ -98,7 +98,7 @@ class SaleController extends Controller
                 $prix_circuit = 0;
                 if (! empty(trim($circuit))) {
                     $circuit = 1;
-                    $prix_circuit = $pro->prix_g_circuit  ;
+                    $prix_circuit = $pro->prix_g_circuit;
                 } else {
                     $circuit = 0;
                 }
@@ -112,12 +112,10 @@ class SaleController extends Controller
                     $batterie = 0;
                 }
 
- 
-
 
                 $user =  User::find((Auth_user::user()->id));
-                $new_solde  =  ($pro->prix_g_tlf)     +  $prix_batterie +    $prix_circuit +  ($user->solde) ;
-
+                $total_garantie = ($pro->prix_g_tlf)     +  $prix_batterie +    $prix_circuit ;
+                $new_solde  = $total_garantie +  ($user->solde);
 
 
                 if ($request->hasFile('info_product_img')  &&  $request->file('info_product_img')->isValid()) {
@@ -146,7 +144,10 @@ class SaleController extends Controller
                     'batterie' =>  $batterie,
                     'circuit' =>  $circuit,
 
+                    'total_garantie' =>   $total_garantie  ,
+
                 ]);
+
 
                 History::create([
                     'product_id' => $request->product_id,
@@ -158,7 +159,6 @@ class SaleController extends Controller
                     'nom_client' => $request->nom_client,
                     'tlf_client' => $request->tlf_client,
                 ]);
-
 
 
 
@@ -192,7 +192,9 @@ class SaleController extends Controller
             ->select(
                 'sales.*',
                 'products.product_name',
-                'products.prix_garantie',
+                'products.prix_g_circuit',
+                // 'products.prix_garantie',
+                // 'products.prix_garantie',
                 DB::raw("DATE_ADD(sales.created_at, INTERVAL products.nb_jr_garantie DAY) as garantie_expiration")
             )
             ->where('sales.seller_id', Auth_user::user()->id)

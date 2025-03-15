@@ -80,9 +80,9 @@
                                     </td>
                                     <td>    {{ $sale->sn }}</td>
                                     <td> <img src="{{ asset('assets/' . $sale->info_product_img) }}" alt="image"
-                                            width="80px">  
+                                             height="60px" >  
                                             <hr>
-                                            <span class="badge bg-primary" >   {{ $sale-> prix_garantie }} Da </span>
+                                            <span class="badge bg-primary" >   {{ $sale-> total_garantie }} Da </span>
                                     </td>
                                     <td> {{ $sale->nom_client }} </td>
                                     <td> {{ $sale->tlf_client }} </td>

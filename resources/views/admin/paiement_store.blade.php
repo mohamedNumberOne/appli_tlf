@@ -71,24 +71,19 @@
                                 </td>
 
                                 <td>
-                                   
+
                                     @if ($paiement->commercial_engagement)
                                         <i class="fas fa-check-square text-success"></i>
-                                        {{ $paiement->date_confirm_com }}
-                                        
+                                        {{ $paiement->date_confirm_com }} 
                                     @else
                                         <i class="fas fa-times text-danger"></i>
                                     @endif
                                 </td>
 
-
-              
-
-                                <td style="max-width: 200px">
+                                <td style="max-width: 200px; ">
 
                                     @if ($paiement->photo_money)
-                                        <img src="{{ asset('assets/' . $paiement->photo_money) }}" alt="image"
-                                            width="80px">
+                                        <img src="{{ asset('assets/' . $paiement->photo_money) }}" alt="image"  width="80px">
                                     @else
                                           <i class="fas fa-times text-danger"></i>
                                     @endif

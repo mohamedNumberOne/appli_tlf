@@ -29,6 +29,8 @@ return new class extends Migration
             $table->boolean('batterie') -> nullable() ;
             $table->boolean('circuit') -> nullable() ;
 
+            $table->integer('total_garantie') ;
+
 
             $table-> foreign("product_id") -> references('id') ->  on('products')->onDelete('SET NULL');
             $table->foreign("seller_id")->references('id')->on('users')->onDelete('SET NULL');

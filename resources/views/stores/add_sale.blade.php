@@ -87,10 +87,9 @@
         @endif
 
         <h1 class="text-center"> Ajouter une vente </h1>
+        
         <form method="post" action="{{ route('ajouter_vente') }}" enctype="multipart/form-data">
             @csrf
-
-
             <div class="row">
                 <div class="form-group col-md-4">
                     <label for="product_id">Produit</label>

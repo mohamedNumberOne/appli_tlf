@@ -21,6 +21,85 @@ Paiments (Commerciaux-Admin)
 <div class="container">
  
  
+  
+    @if (count($all_p_confirmed) > 0)
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="basic-datatables" class="display table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th> id </th>
+                            <th> Store </th>
+                            <th> montant </th>
+                            <th> engagement store </th>
+                            <th> engagement Comm. </th>
+                            <th> photo </th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th> id </th>
+                            <th> Store </th>
+                            <th> montant </th>
+                            <th> engagement store </th>
+                            <th> engagement Comm. </th>
+                            <th> photo </th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+
+
+                        @foreach ($all_p_confirmed as $paiement)
+                            <tr>
+                                <td> {{ $paiement->id }} </td>
+                                <td> {{ $paiement->store_name }} <hr> {{ $paiement->prop_name }} <hr>  {{ $paiement-> tlf_prop }}   </td>
+                                <td> {{ $paiement->montant }} Da </td>
+
+                                <td>
+                                    @if ($paiement->seller_engagement)
+                                        <i class="fas fa-check-square text-success"></i>
+                                        {{ $paiement->created_at }}
+                                    @else
+                                        <i class="fas fa-times text-danger"></i>
+                                    @endif
+                                </td>
+
+                                <td>
+
+                                    @if ($paiement->commercial_engagement)
+                                        <i class="fas fa-check-square text-success"></i>
+                                        {{ $paiement->date_confirm_com }} 
+                                    @else
+                                        <i class="fas fa-times text-danger"></i>
+                                    @endif
+                                </td>
+
+                                <td style="max-width: 200px; ">
+
+                                    @if ($paiement->photo_money)
+                                        <img src="{{ asset('assets/' . $paiement->photo_money) }}" alt="image"  width="80px">
+                                    @else
+                                          <i class="fas fa-times text-danger"></i>
+                                    @endif
+
+                                </td>
+                             
+                            </tr>
+                        @endforeach
+
+                    </tbody>
+                </table>
+            </div>
+            {{ $all_p_confirmed->links() }}
+        </div>
+    @else
+        <div class="alert alert-warning bg-warning text-white text-center">
+            Pas de paiements
+        </div>
+    @endif
+
+
+
 </div>
 
 
