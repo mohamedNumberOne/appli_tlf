@@ -56,6 +56,9 @@
             background-color: #1572e8 !important;
             transition-duration: .2s;
         }
+        .row.mt-4 div {
+            border-left: 1px solid rgb(149, 146, 146) ;
+        }
     </style>
 @endsection
 
@@ -95,7 +98,7 @@
                     <select id="product_id" name="product_id" class="form-control" required>
                         <option value="">
                             @foreach ($all_pro as $pro)
-                        <option value="{{ $pro->id }}" {{ old('product_id') == $pro->id ? 'selected' : '' }}
+                        <option value="{{ $pro->id }}"  
                             {{ $pro->double_puce == 1 ? 'data-dp=true' : '' }}>
                             {{ $pro->product_name }}
                         </option>
@@ -178,20 +181,17 @@
 
             <div class="row mt-4">
 
-
-
                 <div class="col-md-3">
                     <label for="checkboxInput"> Téléphone </label>
-                    <input type="checkbox" id="checkboxInput" value="g_tlf" name="g_tlf[]">
-                    <label for="checkboxInput" class="toggleSwitch"></label>
-
+                    <p id="prix_g_tlf"></p>
                 </div>
+
 
                 <div class="col-md-3">
                     <label for="checkboxInput2"> Circuit de charge </label>
                     <input type="checkbox" id="checkboxInput2" value="circuit" name="circuit[]">
                     <label for="checkboxInput2" class="toggleSwitch"></label>
-
+                    <p id="prix_circuit"></p>
                 </div>
 
 
@@ -199,7 +199,7 @@
                     <label for="checkboxInput3"> Batterie</label>
                     <input type="checkbox" id="checkboxInput3" value="batterie" name="batterie[]">
                     <label for="checkboxInput3" class="toggleSwitch"></label>
-
+                    <p id="prix_batterie"></p>
                 </div>
 
             </div>
@@ -222,6 +222,14 @@
 
         var selectedOption = productId.options[productId.selectedIndex];
         var imei2 = document.getElementById('imei2');
+
+        var prix_g_tlf = document.getElementById('prix_g_tlf');
+        var prix_circuit = document.getElementById('prix_circuit');
+        var prix_batterie = document.getElementById('prix_batterie');
+
+
+
+
 
         // Vérifier la valeur et l'attribut data-dp de l'option sélectionnée
         if (!(selectedOption.value != "" && selectedOption.getAttribute('data-dp') == "true")) {
@@ -249,12 +257,21 @@
 
                         success: function(response) {
 
+                            prix_g_tlf.textContent = response.prix_g_tlf + " DA";
+                            prix_circuit.textContent = response.prix_g_circuit + " DA";
+                            prix_batterie.textContent = response.prix_g_batterie + " DA";
+
                             if (!response.double_puce == 1) {
                                 imei2.value = "";
                                 imei2.disabled = 1;
+
+
+
                             } else {
                                 imei2.disabled = 0;
                             }
+
+
 
 
                         },
@@ -266,10 +283,13 @@
 
                 } else {
                     // $('#productName, #productPrice, #productDescription').text(''); 
-                 
+
                     imei2.value = "";
                     imei2.disabled = 1;
-                     
+
+                    prix_g_tlf.textContent = "" ;
+                    prix_circuit.textContent =  "" ;
+                    prix_batterie.textContent =  "" ;
 
                 }
             });

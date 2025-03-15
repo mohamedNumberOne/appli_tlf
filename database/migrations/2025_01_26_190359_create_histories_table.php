@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('tlf_client');
 
 
+
             $table->foreign("sale_id")->references('id')->on('sales')->onDelete('SET NULL');
             $table->foreign("product_id")->references('id')->on('products')->onDelete('SET NULL');
             

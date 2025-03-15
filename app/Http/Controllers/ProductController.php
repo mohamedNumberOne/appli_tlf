@@ -19,6 +19,7 @@ class ProductController extends Controller
     public function get_info_pro_ajax($id)
     {
         $pro_info = Product::find($id);
+        
         return response()->json($pro_info);
     }
     /**

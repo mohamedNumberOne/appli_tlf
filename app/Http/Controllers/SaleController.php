@@ -42,7 +42,7 @@ class SaleController extends Controller
 
         if ($pro) {
 
-            $g_tlf =  implode('', $request->input('g_tlf', []));
+            // $g_tlf =  implode('', $request->input('g_tlf', []));
             $circuit =  implode('', $request->input('circuit', []));
             $batterie =  implode('', $request->input('batterie', []));
 
@@ -59,7 +59,7 @@ class SaleController extends Controller
                 'nom_client' => 'required|string|max:255',
                 'tlf_client' => 'required|digits_between:8,15',
 
-                'g_tlf.*' => 'in:g_tlf',
+                // 'g_tlf.*' => 'in:g_tlf',
                 'circuit.*' => 'in:circuit',
                 'batterie.*' => 'in:batterie',
 
@@ -80,7 +80,7 @@ class SaleController extends Controller
                     'imei2.digits' => 'IMEI2 doit contenir 15 chiffres',
                     'imei1.unique' => 'IMEI1 existe déja !',
                     'imei2.unique' => 'IMEI2  existe déja !',
-               
+
                 ]
             );
 
@@ -89,29 +89,36 @@ class SaleController extends Controller
             if ($validated) {
 
 
+                // if (! empty(trim($g_tlf))) {
+                //     $g_tlf = 1;
+                // } else {
+                //     $g_tlf = 0;
+                // }
 
-
-                if (! empty(trim($g_tlf))) {
-                    $g_tlf = 1;
-                } else {
-                    $g_tlf = 0;
-                }
-
-
+                $prix_circuit = 0;
                 if (! empty(trim($circuit))) {
                     $circuit = 1;
+                    $prix_circuit = $pro->prix_g_circuit  ;
                 } else {
                     $circuit = 0;
                 }
 
 
+                $prix_batterie = 0;
                 if (! empty(trim($batterie))) {
                     $batterie = 1;
+                    $prix_batterie = $pro->prix_g_batterie;
                 } else {
                     $batterie = 0;
                 }
 
-              
+ 
+
+
+                $user =  User::find((Auth_user::user()->id));
+                $new_solde  =  ($pro->prix_g_tlf)     +  $prix_batterie +    $prix_circuit +  ($user->solde) ;
+
+
 
                 if ($request->hasFile('info_product_img')  &&  $request->file('info_product_img')->isValid()) {
 
@@ -120,8 +127,6 @@ class SaleController extends Controller
                 } else {
                     $info_product_img  = NULL;
                 }
-
-
 
 
                 $seller_id = Auth_user::user()->id;
@@ -137,7 +142,7 @@ class SaleController extends Controller
                     'nom_client' => $request->nom_client,
                     'tlf_client' => $request->tlf_client,
 
-                    'g_tlf' =>  $g_tlf,
+                    'g_tlf' =>  1,
                     'batterie' =>  $batterie,
                     'circuit' =>  $circuit,
 
@@ -155,8 +160,7 @@ class SaleController extends Controller
                 ]);
 
 
-                $user =  User::find((Auth_user::user()->id));
-                $new_solde  =  ($pro->prix_garantie) +   ($user->solde);
+
 
                 $user->update([
                     "solde" => $new_solde
@@ -292,7 +296,6 @@ class SaleController extends Controller
                     'nom_client' => $request->nom_client,
                     'tlf_client' => $request->tlf_client,
                 ]);
-
 
 
                 History::create([

@@ -75,7 +75,7 @@
 
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label for="g_tlf">G. Téléphone</label>
+                    <label for="g_tlf">prix G. Téléphone</label>
                     <input type="number" class="form-control" id="g_tlf" name="prix_g_tlf" required>
                     @error('prix_g_tlf')
                         <span class="text-danger"> {{ $message }} </span>
@@ -83,7 +83,7 @@
                 </div>
 
                 <div class="form-group col-md-4">
-                    <label for="circuit">G. Circuit de charge</label>
+                    <label for="circuit">prix G. Circuit de charge</label>
                     <input type="number" class="form-control" id="circuit" name="prix_g_circuit" required>
                     @error('prix_g_circuit')
                         <span class="text-danger"> {{ $message }} </span>
@@ -92,7 +92,7 @@
 
 
                 <div class="form-group col-md-4">
-                    <label for="batterie">G. Batterie</label>
+                    <label for="batterie">prix G. Batterie</label>
                     <input type="number" class="form-control" id="batterie" name="prix_g_batterie" required>
                     @error('prix_g_batterie')
                         <span class="text-danger"> {{ $message }} </span>
